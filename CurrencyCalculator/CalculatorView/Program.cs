@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Calculate;
 
 namespace CalculatorView
 {
@@ -14,9 +15,10 @@ namespace CalculatorView
         [STAThread]
         static void Main()
         {
+            CalcController ctrl = new CalcController();
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+            Application.Run(new Form1(ctrl));
         }
     }
 }

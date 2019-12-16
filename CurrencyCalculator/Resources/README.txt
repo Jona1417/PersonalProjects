@@ -1,4 +1,9 @@
-﻿AUTHOR: Jonathan Vidal-Contreras
+﻿
+AUTHOR: Jonathan Vidal-Contreras
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~ CurrencyCalculator VERSION 1.0 ~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 (2019/12/16) 10:30 AM
 
@@ -23,3 +28,12 @@
 	should be considered as exact; users should allow for a margin of error when using the calculator/sending money. Also, they should consider fees
 	involved when using some services to send money (like sending to/from a debit card, bank account, etc.)
 	-THIS CALCULATOR CANNOT BY ITSELF SEND THE USER'S MONEY TO SOME INTENDED RECIPIENT. Nor do I intend on implementing such functionality.
+
+-DESIGN:
+	- The CurrencyCalculator project follows the MVC pattern.
+		- Model: The Calculator project will deal with the logic of performing currency conversion and calculations.
+
+		- View: The CalculatorView project will trigger events that occur in the Form and call methods in the Controller.
+
+		- Controller: The CalcController class will deal with the events and call methods in the model that will handle the logic
+			of calculation, etc.

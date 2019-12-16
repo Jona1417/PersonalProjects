@@ -7,6 +7,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CalculatorView", "Calculato
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Resources", "Resources\Resources.csproj", "{36C2BC06-FD7F-4275-828B-CCF8DA6C8B15}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Controller", "CalcController\Controller.csproj", "{455180BB-55F2-42DD-A4E2-1B28F6A759E6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Calculator", "Calculator\Calculator.csproj", "{07C20953-9865-43DE-A534-1F8F7CFF05BB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,9 +22,16 @@ Global
 		{D74FD4BB-76A4-4DF9-B1F2-F61F60DED6EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D74FD4BB-76A4-4DF9-B1F2-F61F60DED6EF}.Release|Any CPU.Build.0 = Release|Any CPU
 		{36C2BC06-FD7F-4275-828B-CCF8DA6C8B15}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{36C2BC06-FD7F-4275-828B-CCF8DA6C8B15}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{36C2BC06-FD7F-4275-828B-CCF8DA6C8B15}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{36C2BC06-FD7F-4275-828B-CCF8DA6C8B15}.Release|Any CPU.Build.0 = Release|Any CPU
+		{455180BB-55F2-42DD-A4E2-1B28F6A759E6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{455180BB-55F2-42DD-A4E2-1B28F6A759E6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{455180BB-55F2-42DD-A4E2-1B28F6A759E6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{455180BB-55F2-42DD-A4E2-1B28F6A759E6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{07C20953-9865-43DE-A534-1F8F7CFF05BB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{07C20953-9865-43DE-A534-1F8F7CFF05BB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{07C20953-9865-43DE-A534-1F8F7CFF05BB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{07C20953-9865-43DE-A534-1F8F7CFF05BB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
