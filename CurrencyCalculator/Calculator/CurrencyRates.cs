@@ -11,7 +11,7 @@ namespace Calculate
     /// 
     /// FOR EXAMPLE: 1 USD (United Stated Dollar) = 1,168.95 South Korean Won (KRW), and 1 KRW = 0.00086 USD
     /// </summary>
-    class CurrencyRates
+    public class CurrencyRates
     {
         /*
          * Conversion from USD to other currencies 
@@ -20,7 +20,7 @@ namespace Calculate
         /// <summary>
         /// Conversion rate of 1 USD to Venezuelan Bolivares according to Google
         /// </summary>
-        public readonly double G_USD_To_VEF;
+        public readonly double G_USD_To_VEF = 0.100125;
 
         /// <summary>
         /// Conversion rate of 1 USD to Colombian Pesos according to Google
@@ -46,7 +46,7 @@ namespace Calculate
         /// <summary>
         /// Conversion rate of 1 USD to Colombian Pesos according to xe.com
         /// </summary>
-        public readonly double XE_USD_To_COP = 3353.96;
+        public readonly double XE_USD_To_COP = 3351.72;
 
 
         /* Conversion Rates from other currencies to USD */
@@ -58,6 +58,12 @@ namespace Calculate
         public readonly double G_VEF_To_USD;
 
         public readonly double G_COP_To_USD;
+        public readonly double WU_USD_TO_COP;
+
+        public CurrencyRates()
+        {
+
+        }
 
     }
 }

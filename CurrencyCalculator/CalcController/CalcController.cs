@@ -33,11 +33,31 @@ namespace Calculate
                     break;
                 default:
                     sendingCurrencyIsValid = true;
-                    break;                    
+                    break;
             }
 
-            //if (text == "") ;
-            //else ;
+            if (sendingCurrencyIsValid && receivingCurrencyIsValid)
+            {
+                selectionsBothValid();
+            }
+        }
+
+        public void ReceivingCurrencyChosen(string text)
+        {
+            switch (text)
+            {
+                case "":
+                    receivingCurrencyIsValid = false;
+                    break;
+                default:
+                    receivingCurrencyIsValid = true;
+                    break;
+            }
+
+            if (sendingCurrencyIsValid && receivingCurrencyIsValid)
+            {
+                selectionsBothValid();
+            }
         }
     }
 }

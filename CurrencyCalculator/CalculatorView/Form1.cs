@@ -16,15 +16,27 @@ namespace CalculatorView
         /// <summary>
         /// The controller for the CurrencyCalculator form
         /// </summary>
-        CalcController controller;
+        private CalcController controller;
 
-        Calculator calculator;
+        private Calculator calculator;
+
+        private string currencyToConvert;
+        private string convertedCurrency;
+
+        private double googleExchangeRate;
+        private double XE_ExchangeRate;
+        private double BCV_ExchangeRate;
+        private double WU_ExchangeRate;
 
         public Form1(CalcController c)
         {
             InitializeComponent();
             controller = c;
             calculator = new Calculator();
+            currencyToConvert = "";
+            convertedCurrency = "";
+            googleExchangeRate = 0;
+            WU_ExchangeRate = 0;
             controller.selectionsBothValid += DisplayExchangeRates;
         }
 
@@ -34,7 +46,48 @@ namespace CalculatorView
         /// </summary>
         private void DisplayExchangeRates()
         {
-            throw new NotImplementedException();
+            //TODO: Try to move all this to the Controller
+            CurrencyRates cRates = new CurrencyRates();
+            switch (sendCurrencyList.SelectedIndex)
+            {
+                case 0: // empty string/no choice
+                    break;
+                case 1: // USD
+                    currencyToConvert = "USD";
+                    switch (ReceiveCurrBox.SelectedIndex)
+                    {
+                        case 0: // empty string/no choice
+                            break;
+                        case 1: // VEF
+                            convertedCurrency = "VEF";
+                            googleExchangeRate = cRates.G_USD_To_VEF;
+                            BCV_ExchangeRate = cRates.BCV_USD_To_VEF;
+                            break;
+                        case 2: // COP
+                            convertedCurrency = "COP";
+                            googleExchangeRate = cRates.G_USD_To_VEF;
+                            WU_ExchangeRate = cRates.WU_USD_TO_COP;
+                            XE_ExchangeRate = cRates.XE_USD_To_COP;
+                            break;
+                    }
+                    break;
+            }
+
+            if (currencyToConvert != "" && convertedCurrency != "") // the check may not be necessary
+            {
+                if (convertedCurrency == "VEF")
+                    exchangeRatesText.Text = "Google (Morningstar): 1 " + currencyToConvert + " = " +
+                        googleExchangeRate + " " + convertedCurrency + "\r\n" +
+                        "Banco Central de Venezuela: 1 " + currencyToConvert + " = " +
+                        BCV_ExchangeRate + " " + convertedCurrency + "\n";
+                else
+                    exchangeRatesText.Text = "Google (Morningstar): 1 " + currencyToConvert + " = " +
+                       googleExchangeRate + " " + convertedCurrency + "\r\n" +
+                       "Western Union: 1 " + currencyToConvert + " = " +
+                       WU_ExchangeRate + " " + convertedCurrency + "\r\n" + 
+                       "xe.com: 1 " + currencyToConvert + " = " +
+                       XE_ExchangeRate + " " + convertedCurrency + "\r\n";
+            }
         }
 
         //TODO: Remove
@@ -52,7 +105,7 @@ namespace CalculatorView
         //TODO: REMOVE
         private void receiveCurrencyText_TextChanged(object sender, EventArgs e)
         {
-            
+
         }
 
         /// <summary>
@@ -76,7 +129,7 @@ namespace CalculatorView
         {
             ToCurrBox.Text = ReceiveCurrBox.Text;
             toCurrency.Text = ReceiveCurrBox.Text;
-            controller.SendingCurrencyChosen(ReceiveCurrBox.Text);
+            controller.ReceivingCurrencyChosen(ReceiveCurrBox.Text);
         }
 
         private void equalsText_TextChanged(object sender, EventArgs e)

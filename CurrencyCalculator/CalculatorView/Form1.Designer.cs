@@ -99,6 +99,7 @@
             // 
             this.sendCurrencyList.FormattingEnabled = true;
             this.sendCurrencyList.Items.AddRange(new object[] {
+            "",
             "United States Dollar (USD)"});
             this.sendCurrencyList.Location = new System.Drawing.Point(188, 51);
             this.sendCurrencyList.Name = "sendCurrencyList";
@@ -123,6 +124,7 @@
             // 
             this.ReceiveCurrBox.FormattingEnabled = true;
             this.ReceiveCurrBox.Items.AddRange(new object[] {
+            "",
             "Venezuelan Bolivar (VEF)",
             "Colombian Peso (COP)"});
             this.ReceiveCurrBox.Location = new System.Drawing.Point(575, 51);
@@ -136,6 +138,7 @@
             this.textBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBox1.Location = new System.Drawing.Point(404, 128);
             this.textBox1.Name = "textBox1";
+            this.textBox1.ReadOnly = true;
             this.textBox1.Size = new System.Drawing.Size(42, 30);
             this.textBox1.TabIndex = 5;
             this.textBox1.Text = "TO";
@@ -145,6 +148,7 @@
             // 
             this.sendCurrBox.Location = new System.Drawing.Point(72, 128);
             this.sendCurrBox.Name = "sendCurrBox";
+            this.sendCurrBox.ReadOnly = true;
             this.sendCurrBox.Size = new System.Drawing.Size(306, 22);
             this.sendCurrBox.TabIndex = 6;
             // 
@@ -152,6 +156,7 @@
             // 
             this.ToCurrBox.Location = new System.Drawing.Point(471, 128);
             this.ToCurrBox.Name = "ToCurrBox";
+            this.ToCurrBox.ReadOnly = true;
             this.ToCurrBox.Size = new System.Drawing.Size(306, 22);
             this.ToCurrBox.TabIndex = 7;
             // 
@@ -169,6 +174,7 @@
             this.exchangeRatesTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
             this.exchangeRatesTitle.Location = new System.Drawing.Point(153, 182);
             this.exchangeRatesTitle.Name = "exchangeRatesTitle";
+            this.exchangeRatesTitle.ReadOnly = true;
             this.exchangeRatesTitle.Size = new System.Drawing.Size(131, 24);
             this.exchangeRatesTitle.TabIndex = 9;
             this.exchangeRatesTitle.Text = "Exchange Rates:";
@@ -216,6 +222,7 @@
             this.toCurrency.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.toCurrency.Location = new System.Drawing.Point(596, 306);
             this.toCurrency.Name = "toCurrency";
+            this.toCurrency.ReadOnly = true;
             this.toCurrency.Size = new System.Drawing.Size(181, 15);
             this.toCurrency.TabIndex = 15;
             // 
