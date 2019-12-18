@@ -11,6 +11,9 @@ namespace Calculate
     /// </summary>
     public class Calculator
     {
-
+        public double Calculate(double input, double exchangeRate)
+        {
+            return input * exchangeRate;
+        }
     }
 }

@@ -22,10 +22,6 @@ namespace Calculate
         /// </summary>
         public readonly double G_USD_To_VEF = 0.100125;
 
-        /// <summary>
-        /// Conversion rate of 1 USD to Colombian Pesos according to Google
-        /// </summary>
-        public readonly double G_USD_To_COP;
 
         /// <summary>
         /// Conversion rate of 1 USD to Venezuelan Bolivares according to xe.com
@@ -44,9 +40,21 @@ namespace Calculate
         public readonly double BCV_USD_To_VEF = 46366.58;
 
         /// <summary>
+        /// Conversion rate of 1 USD to Colombian Pesos according to Google
+        /// </summary>
+        public readonly double G_USD_To_COP = 3342.09;
+
+        /// <summary>
         /// Conversion rate of 1 USD to Colombian Pesos according to xe.com
         /// </summary>
         public readonly double XE_USD_To_COP = 3351.72;
+
+        /// <summary>
+        /// Conversion rate of 1 USD to Colombian Pesos according to Western Union
+        /// </summary>
+        public readonly double WU_USD_TO_COP = 3289.9178;
+
+        public readonly double AVG_USD_To_COP;
 
 
         /* Conversion Rates from other currencies to USD */
@@ -58,12 +66,27 @@ namespace Calculate
         public readonly double G_VEF_To_USD;
 
         public readonly double G_COP_To_USD;
-        public readonly double WU_USD_TO_COP;
+
+        public double AverageExchangeRate { get; private set; }
+
 
         public CurrencyRates()
         {
-
+            AVG_USD_To_COP = (G_USD_To_COP + WU_USD_TO_COP + XE_USD_To_COP) / 3;
+            AverageExchangeRate = 0;
         }
+
+        public void setAverage(List<double> rates)
+        {
+            double sum = 0;
+            foreach(double d in rates)
+            {
+                sum += d;
+            }
+
+            AverageExchangeRate = sum / rates.Count;
+        }
+
 
     }
 }

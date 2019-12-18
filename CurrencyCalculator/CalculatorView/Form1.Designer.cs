@@ -118,7 +118,7 @@
             this.receiveCurrencyText.Size = new System.Drawing.Size(165, 19);
             this.receiveCurrencyText.TabIndex = 3;
             this.receiveCurrencyText.Text = "Receiver Currency:";
-            this.receiveCurrencyText.TextChanged += new System.EventHandler(this.receiveCurrencyText_TextChanged);
+           
             // 
             // ReceiveCurrBox
             // 
@@ -198,7 +198,7 @@
             this.equalsText.TabIndex = 12;
             this.equalsText.Text = "=";
             this.equalsText.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.equalsText.TextChanged += new System.EventHandler(this.equalsText_TextChanged);
+            
             // 
             // fromCurrency
             // 
@@ -262,7 +262,6 @@
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Form1";
             this.Text = "CurrencyCalculator";
-            this.Load += new System.EventHandler(this.Form1_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
