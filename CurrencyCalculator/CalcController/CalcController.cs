@@ -58,6 +58,8 @@ namespace Calculate
             {
                 selectionsBothValid();
             }
-        }       
+        }
+
+       
     }
 }

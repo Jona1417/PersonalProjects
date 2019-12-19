@@ -19,14 +19,6 @@ namespace CalculatorView
         private CalcController controller;
 
         private Calculator calculator;
-
-        private string currencyToConvert;
-        private string convertedCurrency;
-
-        private double googleExchangeRate;
-        private double XE_ExchangeRate;
-        private double BCV_ExchangeRate;
-        private double WU_ExchangeRate;
         private double averageExchangeRate;
         private CurrencyRates cRates;
 
@@ -36,12 +28,11 @@ namespace CalculatorView
             controller = c;
             calculator = new Calculator();
             cRates = new CurrencyRates();
-            currencyToConvert = "";
-            convertedCurrency = "";
-            googleExchangeRate = 0;
-            WU_ExchangeRate = 0;
             averageExchangeRate = 0;
             controller.selectionsBothValid += DisplayExchangeRates;
+
+            // Only let the buttons appear when choices are selected
+            RemoveButtons();
         }
 
         /// <summary>
@@ -51,60 +42,41 @@ namespace CalculatorView
         private void DisplayExchangeRates()
         {
             //TODO: Try to move all this to the Controller
-            CurrencyRates cRates = new CurrencyRates();
-            List<double> rates = new List<double>();
+            // CurrencyRates cRates = new CurrencyRates();
+            // List<double> rates = new List<double>();
             //string displayString = controller.SetDisplayString(sendCurrencyList.SelectedIndex);
             switch (sendCurrencyList.SelectedIndex)
             {
                 case 0: // empty string/no choice
                     break;
                 case 1: // USD
-                    currencyToConvert = "USD";
+                    //currencyToConvert = "USD";
                     switch (ReceiveCurrBox.SelectedIndex)
                     {
                         case 0: // empty string/no choice
                             break;
-                        case 1: // VEF
-                            convertedCurrency = "VEF";
-                            googleExchangeRate = cRates.G_USD_To_VEF;
-                            BCV_ExchangeRate = cRates.BCV_USD_To_VEF;
-                            rates.Add(googleExchangeRate);
-                            rates.Add(BCV_ExchangeRate);
-                            cRates.setAverage(rates);
-                            averageExchangeRate = cRates.AverageExchangeRate;
+                        case 1: // VEF: only has 2 options (google, BCV)
+                            RemoveButtons();
+                            GoogleRateButton.Enabled = true;
+                            GoogleRateButton.Visible = true;
+                            XEButton.Enabled = true;
+                            XEButton.Visible = true;
+                            GoogleRateButton.Text = "Google (Morningstar):";
+                            GoogleRateButton.Text = calculator.SetFirstButtonText("VEF", cRates);
+
+                            //Xe button will be the BCV
+                            XEButton.Text = calculator.SetSecondButtonText("VEF", cRates);
+                            //exchangeRatesText.Text = calculator.DisplayExchangeRates(cRates, 1, 1);
                             break;
-                        case 2: // COP
-                            convertedCurrency = "COP";
-                            googleExchangeRate = cRates.G_USD_To_COP;
-                            WU_ExchangeRate = cRates.WU_USD_TO_COP;
-                            XE_ExchangeRate = cRates.XE_USD_To_COP;
-                            rates.Add(googleExchangeRate);
-                            rates.Add(WU_ExchangeRate);
-                            rates.Add(XE_ExchangeRate);
-                            cRates.setAverage(rates);
-                            averageExchangeRate = cRates.AverageExchangeRate;
+                        case 2: // COP: has all options
+                            RemoveButtons();
+                            EnableAllRadioButtons();
+                            //exchangeRatesText.Text = calculator.DisplayExchangeRates(cRates, 1, 2);
                             break;
                     }
                     break;
-            }
-
-
-            if (currencyToConvert != "" && convertedCurrency != "") // the check may not be necessary
-            {
-                if (convertedCurrency == "VEF")
-                    exchangeRatesText.Text = "Google (Morningstar): 1 " + currencyToConvert + " = " +
-                        googleExchangeRate + " " + convertedCurrency + "\r\n" +
-                        "Banco Central de Venezuela: 1 " + currencyToConvert + " = " +
-                        BCV_ExchangeRate + " " + convertedCurrency + "\r\n" +
-                         "Average: 1 " + currencyToConvert + " = " + cRates.AverageExchangeRate + " " + convertedCurrency + "\r\n";
-                else
-                    exchangeRatesText.Text = "Google (Morningstar): 1 " + currencyToConvert + " = " +
-                       googleExchangeRate + " " + convertedCurrency + "\r\n" +
-                       "Western Union: 1 " + currencyToConvert + " = " +
-                       WU_ExchangeRate + " " + convertedCurrency + "\r\n" +
-                       "xe.com: 1 " + currencyToConvert + " = " +
-                       XE_ExchangeRate + " " + convertedCurrency + "\r\n" +
-                       "Average: 1 " + currencyToConvert + " = " + cRates.AverageExchangeRate + " " + convertedCurrency + "\r\n";
+                default:
+                    break;
             }
         }
 
@@ -144,9 +116,43 @@ namespace CalculatorView
             if (!double.TryParse(inputNumberBox.Text, out double input))
                 MessageBox.Show("Input is not valid. Try again", "Invalid Input", MessageBoxButtons.OK, MessageBoxIcon.Error);
             else
-            {                
-                outputNumberBox.Text = "" + calculator.Calculate(input, averageExchangeRate);
+            {
+                outputNumberBox.Text = "" + calculator.Calculate(input, cRates.AverageExchangeRate);
             }
+        }
+
+        private void radioButton1_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void radioButton4_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void RemoveButtons()
+        {
+            GoogleRateButton.Visible = false;
+            GoogleRateButton.Enabled = false;
+            XEButton.Visible = false;
+            XEButton.Enabled = false;
+            WUButton.Visible = false;
+            WUButton.Enabled = false;
+            AverageRateButton.Visible = false;
+            AverageRateButton.Enabled = false;
+        }
+
+        private void EnableAllRadioButtons()
+        {
+            GoogleRateButton.Visible = true;
+            GoogleRateButton.Enabled = true;
+            XEButton.Visible = true;
+            XEButton.Enabled = true;
+            WUButton.Visible = true;
+            WUButton.Enabled = true;
+            AverageRateButton.Visible = true;
+            AverageRateButton.Enabled = true;
         }
     }
 }

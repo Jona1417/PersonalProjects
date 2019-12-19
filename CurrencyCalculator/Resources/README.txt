@@ -37,3 +37,9 @@ AUTHOR: Jonathan Vidal-Contreras
 
 		- Controller: The CalcController class will deal with the events and call methods in the model that will handle the logic
 			of calculation, etc.
+
+(2019/12/18)
+
+-Removed the ExchangeRateTextBox, which displayed the various rates and the average exchange rate between currencies. Now in its place there
+	is a series of radio buttons that allow for the user to pick an exchange rate that they would like to use for their calculations.
+	-TODO: implement the choices leading to different calculation results based on their choosing from 1 of the radio buttons.
