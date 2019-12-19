@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Control;
 
 namespace CalculatorView
 {
@@ -18,8 +19,14 @@ namespace CalculatorView
         /// </summary>
         private CalcController controller;
 
+        /// <summary>
+        /// Takes care of the calculations between currencies
+        /// </summary>
         private Calculator calculator;
-        private double averageExchangeRate;
+
+        /// <summary>
+        /// Keeps track of the exchange rates
+        /// </summary>
         private CurrencyRates cRates;
 
         public Form1(CalcController c)
@@ -28,7 +35,7 @@ namespace CalculatorView
             controller = c;
             calculator = new Calculator();
             cRates = new CurrencyRates();
-            averageExchangeRate = 0;
+
             controller.selectionsBothValid += DisplayExchangeRates;
 
             // Only let the buttons appear when choices are selected
@@ -42,16 +49,13 @@ namespace CalculatorView
         private void DisplayExchangeRates()
         {
             //TODO: Try to move all this to the Controller
-            // CurrencyRates cRates = new CurrencyRates();
-            // List<double> rates = new List<double>();
-            //string displayString = controller.SetDisplayString(sendCurrencyList.SelectedIndex);
             switch (sendCurrencyList.SelectedIndex)
             {
                 case 0: // empty string/no choice
                     break;
                 case 1: // USD
                     //currencyToConvert = "USD";
-                    switch (ReceiveCurrBox.SelectedIndex)
+                    switch (receiveCurrencyList.SelectedIndex)
                     {
                         case 0: // empty string/no choice
                             break;
@@ -61,17 +65,26 @@ namespace CalculatorView
                             GoogleRateButton.Visible = true;
                             XEButton.Enabled = true;
                             XEButton.Visible = true;
-                            GoogleRateButton.Text = "Google (Morningstar):";
+
+                            //set the exchange rates
+                            calculator.SetExchangeRates(cRates, 1, 1);
                             GoogleRateButton.Text = calculator.SetFirstButtonText("VEF", cRates);
 
                             //Xe button will be the BCV
                             XEButton.Text = calculator.SetSecondButtonText("VEF", cRates);
-                            //exchangeRatesText.Text = calculator.DisplayExchangeRates(cRates, 1, 1);
+
                             break;
                         case 2: // COP: has all options
                             RemoveButtons();
                             EnableAllRadioButtons();
-                            //exchangeRatesText.Text = calculator.DisplayExchangeRates(cRates, 1, 2);
+
+                            //set the exchange rates
+                            calculator.SetExchangeRates(cRates, 1, 2);
+
+                            GoogleRateButton.Text = calculator.SetFirstButtonText("COP", cRates);
+                            XEButton.Text = calculator.SetSecondButtonText("COP", cRates);
+                            WUButton.Text = calculator.SetThirdRadioButtonText();
+                            AverageRateButton.Text = calculator.SetFourthRadioButtonText();
                             break;
                     }
                     break;
@@ -80,7 +93,11 @@ namespace CalculatorView
             }
         }
 
-
+        /// <summary>
+        /// When the user clicks on the Manual Mode item in the help menu
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void manualModeToolStripMenuItem_Click(object sender, EventArgs e)
         {
             MessageBox.Show("In Version 1.0, there is no manual input mode as of yet. Please wait for future versions" +
@@ -94,9 +111,9 @@ namespace CalculatorView
         /// <param name="e"></param>
         private void sendCurrencyList_SelectedIndexChanged(object sender, EventArgs e)
         {
-            sendCurrBox.Text = sendCurrencyList.Text;
+           
             fromCurrency.Text = sendCurrencyList.Text;
-            controller.SendingCurrencyChosen(sendCurrBox.Text);
+            controller.SendingCurrencyChosen(sendCurrencyList.Text);
         }
 
         /// <summary>
@@ -106,9 +123,8 @@ namespace CalculatorView
         /// <param name="e"></param>
         private void receiveCurrBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            ToCurrBox.Text = ReceiveCurrBox.Text;
-            toCurrency.Text = ReceiveCurrBox.Text;
-            controller.ReceivingCurrencyChosen(ReceiveCurrBox.Text);
+            toCurrency.Text = receiveCurrencyList.Text;
+            controller.ReceivingCurrencyChosen(receiveCurrencyList.Text);
         }
 
         private void calculateButton_Click(object sender, EventArgs e)
@@ -117,20 +133,13 @@ namespace CalculatorView
                 MessageBox.Show("Input is not valid. Try again", "Invalid Input", MessageBoxButtons.OK, MessageBoxIcon.Error);
             else
             {
-                outputNumberBox.Text = "" + calculator.Calculate(input, cRates.AverageExchangeRate);
+                outputNumberBox.Text = "" + calculator.Calculate(input, calculator.CurrentExchangeRate);
             }
         }
 
-        private void radioButton1_CheckedChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void radioButton4_CheckedChanged(object sender, EventArgs e)
-        {
-
-        }
-
+        /// <summary>
+        /// Temporarily removes and disables the radio buttons on the Form (allowing for resetting values)
+        /// </summary>
         private void RemoveButtons()
         {
             GoogleRateButton.Visible = false;
@@ -143,16 +152,62 @@ namespace CalculatorView
             AverageRateButton.Enabled = false;
         }
 
+        /// <summary>
+        /// Re-enables all the radio buttons when a currency selection is changed and unchecks any that were previously checked
+        /// </summary>
         private void EnableAllRadioButtons()
         {
             GoogleRateButton.Visible = true;
             GoogleRateButton.Enabled = true;
+            GoogleRateButton.Checked = false;   
+                       
             XEButton.Visible = true;
             XEButton.Enabled = true;
+            XEButton.Checked = false;
+
             WUButton.Visible = true;
             WUButton.Enabled = true;
+            WUButton.Checked = false;
+
             AverageRateButton.Visible = true;
             AverageRateButton.Enabled = true;
+            AverageRateButton.Checked = false;
+        }
+
+        private void GoogleRateButton_CheckedChanged(object sender, EventArgs e)
+        {
+            controller.SetCurrentExchangeChoice(receiveCurrencyList.Text, calculator, cRates, 1);
+        }
+
+        private void XEButton_CheckedChanged(object sender, EventArgs e)
+        {
+            controller.SetCurrentExchangeChoice(receiveCurrencyList.Text, calculator, cRates, 2);
+        }
+
+        private void WUButton_CheckedChanged(object sender, EventArgs e)
+        {
+            controller.SetCurrentExchangeChoice(receiveCurrencyList.Text, calculator, cRates, 3);
+        }
+
+        private void AverageRateButton_CheckedChanged(object sender, EventArgs e)
+        {
+            controller.SetCurrentExchangeChoice(receiveCurrencyList.Text, calculator, cRates, 4);
+        }
+
+        private void inputNumberBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+                calculateButton_Click(sender, e);
+        }
+
+        private void TOBox_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void outputNumberBox_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

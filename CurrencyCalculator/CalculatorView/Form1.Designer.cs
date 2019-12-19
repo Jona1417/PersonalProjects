@@ -35,10 +35,8 @@
             this.sendCurrencyText = new System.Windows.Forms.TextBox();
             this.sendCurrencyList = new System.Windows.Forms.ComboBox();
             this.receiveCurrencyText = new System.Windows.Forms.TextBox();
-            this.ReceiveCurrBox = new System.Windows.Forms.ComboBox();
+            this.receiveCurrencyList = new System.Windows.Forms.ComboBox();
             this.TOBox = new System.Windows.Forms.TextBox();
-            this.sendCurrBox = new System.Windows.Forms.TextBox();
-            this.ToCurrBox = new System.Windows.Forms.TextBox();
             this.exchangeRatesTitle = new System.Windows.Forms.TextBox();
             this.inputNumberBox = new System.Windows.Forms.TextBox();
             this.equalsText = new System.Windows.Forms.TextBox();
@@ -61,14 +59,14 @@
             this.helpToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(800, 30);
+            this.menuStrip1.Size = new System.Drawing.Size(832, 28);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
             // aboutToolStripMenuItem
             // 
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(64, 26);
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(64, 24);
             this.aboutToolStripMenuItem.Text = "About";
             // 
             // helpToolStripMenuItem
@@ -76,7 +74,7 @@
             this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.manualModeToolStripMenuItem});
             this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
-            this.helpToolStripMenuItem.Size = new System.Drawing.Size(55, 26);
+            this.helpToolStripMenuItem.Size = new System.Drawing.Size(55, 24);
             this.helpToolStripMenuItem.Text = "Help";
             // 
             // manualModeToolStripMenuItem
@@ -91,7 +89,7 @@
             this.sendCurrencyText.BackColor = System.Drawing.SystemColors.Menu;
             this.sendCurrencyText.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.sendCurrencyText.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.sendCurrencyText.Location = new System.Drawing.Point(31, 51);
+            this.sendCurrencyText.Location = new System.Drawing.Point(133, 59);
             this.sendCurrencyText.Name = "sendCurrencyText";
             this.sendCurrencyText.ReadOnly = true;
             this.sendCurrencyText.Size = new System.Drawing.Size(151, 19);
@@ -100,13 +98,14 @@
             // 
             // sendCurrencyList
             // 
+            this.sendCurrencyList.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
             this.sendCurrencyList.FormattingEnabled = true;
             this.sendCurrencyList.Items.AddRange(new object[] {
             "",
             "United States Dollar (USD)"});
-            this.sendCurrencyList.Location = new System.Drawing.Point(188, 51);
+            this.sendCurrencyList.Location = new System.Drawing.Point(31, 84);
             this.sendCurrencyList.Name = "sendCurrencyList";
-            this.sendCurrencyList.Size = new System.Drawing.Size(199, 24);
+            this.sendCurrencyList.Size = new System.Drawing.Size(345, 33);
             this.sendCurrencyList.TabIndex = 2;
             this.sendCurrencyList.SelectedIndexChanged += new System.EventHandler(this.sendCurrencyList_SelectedIndexChanged);
             // 
@@ -115,7 +114,7 @@
             this.receiveCurrencyText.BackColor = System.Drawing.SystemColors.Menu;
             this.receiveCurrencyText.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.receiveCurrencyText.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.receiveCurrencyText.Location = new System.Drawing.Point(404, 51);
+            this.receiveCurrencyText.Location = new System.Drawing.Point(550, 59);
             this.receiveCurrencyText.Name = "receiveCurrencyText";
             this.receiveCurrencyText.ReadOnly = true;
             this.receiveCurrencyText.Size = new System.Drawing.Size(165, 19);
@@ -124,68 +123,56 @@
             // 
             // ReceiveCurrBox
             // 
-            this.ReceiveCurrBox.FormattingEnabled = true;
-            this.ReceiveCurrBox.Items.AddRange(new object[] {
+            this.receiveCurrencyList.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.receiveCurrencyList.FormattingEnabled = true;
+            this.receiveCurrencyList.Items.AddRange(new object[] {
             "",
             "Venezuelan Bolivar (VEF)",
             "Colombian Peso (COP)"});
-            this.ReceiveCurrBox.Location = new System.Drawing.Point(575, 51);
-            this.ReceiveCurrBox.Name = "ReceiveCurrBox";
-            this.ReceiveCurrBox.Size = new System.Drawing.Size(200, 24);
-            this.ReceiveCurrBox.TabIndex = 4;
-            this.ReceiveCurrBox.SelectedIndexChanged += new System.EventHandler(this.receiveCurrBox_SelectedIndexChanged);
+            this.receiveCurrencyList.Location = new System.Drawing.Point(471, 84);
+            this.receiveCurrencyList.Name = "ReceiveCurrBox";
+            this.receiveCurrencyList.Size = new System.Drawing.Size(306, 33);
+            this.receiveCurrencyList.TabIndex = 4;
+            this.receiveCurrencyList.SelectedIndexChanged += new System.EventHandler(this.receiveCurrBox_SelectedIndexChanged);
             // 
             // TOBox
             // 
             this.TOBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TOBox.Location = new System.Drawing.Point(404, 128);
+            this.TOBox.Location = new System.Drawing.Point(403, 84);
             this.TOBox.Name = "TOBox";
             this.TOBox.ReadOnly = true;
             this.TOBox.Size = new System.Drawing.Size(42, 30);
             this.TOBox.TabIndex = 5;
             this.TOBox.Text = "TO";
             this.TOBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // sendCurrBox
-            // 
-            this.sendCurrBox.Location = new System.Drawing.Point(72, 128);
-            this.sendCurrBox.Name = "sendCurrBox";
-            this.sendCurrBox.ReadOnly = true;
-            this.sendCurrBox.Size = new System.Drawing.Size(306, 22);
-            this.sendCurrBox.TabIndex = 6;
-            // 
-            // ToCurrBox
-            // 
-            this.ToCurrBox.Location = new System.Drawing.Point(471, 128);
-            this.ToCurrBox.Name = "ToCurrBox";
-            this.ToCurrBox.ReadOnly = true;
-            this.ToCurrBox.Size = new System.Drawing.Size(306, 22);
-            this.ToCurrBox.TabIndex = 7;
+            this.TOBox.TextChanged += new System.EventHandler(this.TOBox_TextChanged);
             // 
             // exchangeRatesTitle
             // 
             this.exchangeRatesTitle.BackColor = System.Drawing.SystemColors.Menu;
-            this.exchangeRatesTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+            this.exchangeRatesTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.exchangeRatesTitle.Location = new System.Drawing.Point(153, 182);
             this.exchangeRatesTitle.Name = "exchangeRatesTitle";
             this.exchangeRatesTitle.ReadOnly = true;
-            this.exchangeRatesTitle.Size = new System.Drawing.Size(131, 24);
+            this.exchangeRatesTitle.Size = new System.Drawing.Size(131, 27);
             this.exchangeRatesTitle.TabIndex = 9;
             this.exchangeRatesTitle.Text = "Exchange Rates:";
             // 
             // inputNumberBox
             // 
-            this.inputNumberBox.Location = new System.Drawing.Point(471, 212);
+            this.inputNumberBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.inputNumberBox.Location = new System.Drawing.Point(471, 191);
             this.inputNumberBox.Name = "inputNumberBox";
-            this.inputNumberBox.Size = new System.Drawing.Size(108, 22);
+            this.inputNumberBox.Size = new System.Drawing.Size(108, 30);
             this.inputNumberBox.TabIndex = 11;
+            this.inputNumberBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.inputNumberBox_KeyDown);
             // 
             // equalsText
             // 
             this.equalsText.BackColor = System.Drawing.SystemColors.Menu;
             this.equalsText.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.equalsText.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.equalsText.Location = new System.Drawing.Point(575, 254);
+            this.equalsText.Location = new System.Drawing.Point(503, 245);
             this.equalsText.Name = "equalsText";
             this.equalsText.ReadOnly = true;
             this.equalsText.Size = new System.Drawing.Size(33, 23);
@@ -196,34 +183,38 @@
             // fromCurrency
             // 
             this.fromCurrency.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.fromCurrency.Location = new System.Drawing.Point(596, 215);
+            this.fromCurrency.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.fromCurrency.Location = new System.Drawing.Point(585, 198);
             this.fromCurrency.Name = "fromCurrency";
             this.fromCurrency.ReadOnly = true;
-            this.fromCurrency.Size = new System.Drawing.Size(181, 15);
+            this.fromCurrency.Size = new System.Drawing.Size(235, 19);
             this.fromCurrency.TabIndex = 13;
             // 
             // outputNumberBox
             // 
-            this.outputNumberBox.Location = new System.Drawing.Point(471, 303);
+            this.outputNumberBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.outputNumberBox.Location = new System.Drawing.Point(471, 291);
             this.outputNumberBox.Name = "outputNumberBox";
-            this.outputNumberBox.Size = new System.Drawing.Size(108, 22);
+            this.outputNumberBox.Size = new System.Drawing.Size(108, 30);
             this.outputNumberBox.TabIndex = 14;
+            this.outputNumberBox.TextChanged += new System.EventHandler(this.outputNumberBox_TextChanged);
             // 
             // toCurrency
             // 
             this.toCurrency.BackColor = System.Drawing.SystemColors.Menu;
             this.toCurrency.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.toCurrency.Location = new System.Drawing.Point(596, 306);
+            this.toCurrency.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.toCurrency.Location = new System.Drawing.Point(585, 298);
             this.toCurrency.Name = "toCurrency";
             this.toCurrency.ReadOnly = true;
-            this.toCurrency.Size = new System.Drawing.Size(181, 15);
+            this.toCurrency.Size = new System.Drawing.Size(235, 20);
             this.toCurrency.TabIndex = 15;
             // 
             // calculateButton
             // 
             this.calculateButton.BackColor = System.Drawing.SystemColors.MenuHighlight;
             this.calculateButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.calculateButton.Location = new System.Drawing.Point(560, 356);
+            this.calculateButton.Location = new System.Drawing.Point(618, 230);
             this.calculateButton.Name = "calculateButton";
             this.calculateButton.Size = new System.Drawing.Size(120, 38);
             this.calculateButton.TabIndex = 16;
@@ -234,54 +225,60 @@
             // GoogleRateButton
             // 
             this.GoogleRateButton.AutoSize = true;
+            this.GoogleRateButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
             this.GoogleRateButton.Location = new System.Drawing.Point(31, 215);
             this.GoogleRateButton.Name = "GoogleRateButton";
-            this.GoogleRateButton.Size = new System.Drawing.Size(168, 21);
+            this.GoogleRateButton.Size = new System.Drawing.Size(175, 22);
             this.GoogleRateButton.TabIndex = 17;
             this.GoogleRateButton.TabStop = true;
             this.GoogleRateButton.Text = "Google (Morningstar):";
             this.GoogleRateButton.UseVisualStyleBackColor = true;
-            this.GoogleRateButton.CheckedChanged += new System.EventHandler(this.radioButton1_CheckedChanged);
+            this.GoogleRateButton.CheckedChanged += new System.EventHandler(this.GoogleRateButton_CheckedChanged);
             // 
             // XEButton
             // 
             this.XEButton.AutoSize = true;
-            this.XEButton.Location = new System.Drawing.Point(31, 242);
+            this.XEButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+            this.XEButton.Location = new System.Drawing.Point(31, 243);
             this.XEButton.Name = "XEButton";
-            this.XEButton.Size = new System.Drawing.Size(77, 21);
+            this.XEButton.Size = new System.Drawing.Size(82, 22);
             this.XEButton.TabIndex = 18;
             this.XEButton.TabStop = true;
             this.XEButton.Text = "xe.com:";
             this.XEButton.UseVisualStyleBackColor = true;
+            this.XEButton.CheckedChanged += new System.EventHandler(this.XEButton_CheckedChanged);
             // 
             // WUButton
             // 
             this.WUButton.AutoSize = true;
-            this.WUButton.Location = new System.Drawing.Point(31, 269);
+            this.WUButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+            this.WUButton.Location = new System.Drawing.Point(31, 271);
             this.WUButton.Name = "WUButton";
-            this.WUButton.Size = new System.Drawing.Size(131, 21);
+            this.WUButton.Size = new System.Drawing.Size(136, 22);
             this.WUButton.TabIndex = 19;
             this.WUButton.TabStop = true;
             this.WUButton.Text = "Western Union: ";
             this.WUButton.UseVisualStyleBackColor = true;
+            this.WUButton.CheckedChanged += new System.EventHandler(this.WUButton_CheckedChanged);
             // 
             // AverageRateButton
             // 
             this.AverageRateButton.AutoSize = true;
-            this.AverageRateButton.Location = new System.Drawing.Point(31, 296);
+            this.AverageRateButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+            this.AverageRateButton.Location = new System.Drawing.Point(31, 299);
             this.AverageRateButton.Name = "AverageRateButton";
-            this.AverageRateButton.Size = new System.Drawing.Size(90, 21);
+            this.AverageRateButton.Size = new System.Drawing.Size(90, 22);
             this.AverageRateButton.TabIndex = 20;
             this.AverageRateButton.TabStop = true;
             this.AverageRateButton.Text = "Average: ";
             this.AverageRateButton.UseVisualStyleBackColor = true;
-            this.AverageRateButton.CheckedChanged += new System.EventHandler(this.radioButton4_CheckedChanged);
+            this.AverageRateButton.CheckedChanged += new System.EventHandler(this.AverageRateButton_CheckedChanged);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(832, 450);
             this.Controls.Add(this.AverageRateButton);
             this.Controls.Add(this.WUButton);
             this.Controls.Add(this.XEButton);
@@ -293,10 +290,8 @@
             this.Controls.Add(this.equalsText);
             this.Controls.Add(this.inputNumberBox);
             this.Controls.Add(this.exchangeRatesTitle);
-            this.Controls.Add(this.ToCurrBox);
-            this.Controls.Add(this.sendCurrBox);
             this.Controls.Add(this.TOBox);
-            this.Controls.Add(this.ReceiveCurrBox);
+            this.Controls.Add(this.receiveCurrencyList);
             this.Controls.Add(this.receiveCurrencyText);
             this.Controls.Add(this.sendCurrencyList);
             this.Controls.Add(this.sendCurrencyText);
@@ -320,10 +315,8 @@
         private System.Windows.Forms.TextBox sendCurrencyText;
         private System.Windows.Forms.ComboBox sendCurrencyList;
         private System.Windows.Forms.TextBox receiveCurrencyText;
-        private System.Windows.Forms.ComboBox ReceiveCurrBox;
+        private System.Windows.Forms.ComboBox receiveCurrencyList;
         private System.Windows.Forms.TextBox TOBox;
-        private System.Windows.Forms.TextBox sendCurrBox;
-        private System.Windows.Forms.TextBox ToCurrBox;
         private System.Windows.Forms.TextBox exchangeRatesTitle;
         private System.Windows.Forms.TextBox inputNumberBox;
         private System.Windows.Forms.TextBox equalsText;

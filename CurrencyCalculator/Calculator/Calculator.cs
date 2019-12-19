@@ -19,7 +19,11 @@ namespace Calculate
         private double BCV_ExchangeRate;
         private double WU_ExchangeRate;
         private double averageExchangeRate;
-        // private CurrencyRates cRates;
+
+        /// <summary>
+        /// Indicates the user's most current choice for calculating currency exchanges
+        /// </summary>
+        public double CurrentExchangeRate { get; set; }
 
         public Calculator()
         {
@@ -29,10 +33,12 @@ namespace Calculate
             googleExchangeRate = 0;
             WU_ExchangeRate = 0;
             averageExchangeRate = 0;
+            CurrentExchangeRate = 0;
         }
-        public double Calculate(double input, double exchangeRate)
+       
+        public double Calculate(double input, double currentExchangeRate)
         {
-            return input * exchangeRate;
+            return input * currentExchangeRate;
         }
 
         /// <summary>
@@ -76,31 +82,13 @@ namespace Calculate
                             cRates.setAverage(rates);
                             averageExchangeRate = cRates.AverageExchangeRate;
                             break;
+                        default:
+                            break;
                     }
                     break;
                 default:
                     break;
             }
-
-            //if (currencyToConvert != "" && convertedCurrency != "") // the check may not be necessary
-            //{
-            //    if (convertedCurrency == "VEF")
-            //        return "Google (Morningstar): 1 " + currencyToConvert + " = " +
-            //            googleExchangeRate + " " + convertedCurrency + "\r\n" +
-            //            "Banco Central de Venezuela: 1 " + currencyToConvert + " = " +
-            //            BCV_ExchangeRate + " " + convertedCurrency + "\r\n" +
-            //             "Average: 1 " + currencyToConvert + " = " + cRates.AverageExchangeRate + " " + convertedCurrency + "\r\n";
-            //    else
-            //        return "Google (Morningstar): 1 " + currencyToConvert + " = " +
-            //           googleExchangeRate + " " + convertedCurrency + "\r\n" +
-            //           "Western Union: 1 " + currencyToConvert + " = " +
-            //           WU_ExchangeRate + " " + convertedCurrency + "\r\n" +
-            //           "xe.com: 1 " + currencyToConvert + " = " +
-            //           XE_ExchangeRate + " " + convertedCurrency + "\r\n" +
-            //           "Average: 1 " + currencyToConvert + " = " + cRates.AverageExchangeRate + " " + convertedCurrency + "\r\n";
-            //}
-            //else
-            //    return "INVALID CHOICES";
         }
 
         /// <summary>
@@ -111,7 +99,6 @@ namespace Calculate
         {
             return "Google (Morningstar): 1 " + currencyToConvert + " = " +
                     googleExchangeRate + " " + convertedCurrency + "\r\n";
-
         }
 
         /// <summary>
@@ -125,7 +112,6 @@ namespace Calculate
                     BCV_ExchangeRate + " " + convertedCurrency + "\r\n";
             else
                 return "xe.com: 1 " + currencyToConvert + " = " + XE_ExchangeRate + " " + convertedCurrency + "\r\n";
-
         }
 
         /// <summary>
@@ -134,7 +120,7 @@ namespace Calculate
         /// <returns></returns>
         public string SetThirdRadioButtonText()
         {
-            return "";
+            return "Western Union: 1 " + currencyToConvert + " = " + WU_ExchangeRate + " " + convertedCurrency + "\r\n";
         }
 
         /// <summary>
@@ -143,7 +129,7 @@ namespace Calculate
         /// <returns></returns>
         public string SetFourthRadioButtonText()
         {
-            return "";
+            return "Average: 1 " + currencyToConvert + " = " + averageExchangeRate + " " + convertedCurrency + "\r\n";
         }
 
     }

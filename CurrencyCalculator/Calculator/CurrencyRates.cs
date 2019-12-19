@@ -55,9 +55,11 @@ namespace Calculate
         public readonly double WU_USD_TO_COP = 3289.9178;
 
         public readonly double AVG_USD_To_COP;
+            
 
-
+        //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         /* Conversion Rates from other currencies to USD */
+        //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
         public readonly double XE_VEF_To_USD;
 
