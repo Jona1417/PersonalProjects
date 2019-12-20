@@ -63,8 +63,13 @@ namespace CalculatorView
                             RemoveButtons();
                             GoogleRateButton.Enabled = true;
                             GoogleRateButton.Visible = true;
+                            GoogleRateButton.Checked = false;
                             XEButton.Enabled = true;
                             XEButton.Visible = true;
+                            XEButton.Checked = false;
+                            WUButton.Visible = true;
+                            WUButton.Enabled = true;
+                            WUButton.Checked = false;
 
                             //set the exchange rates
                             calculator.SetExchangeRates(cRates, 1, 1);
@@ -73,6 +78,7 @@ namespace CalculatorView
                             //Xe button will be the BCV
                             XEButton.Text = calculator.SetSecondButtonText("VEF", cRates);
 
+                            WUButton.Text = calculator.SetThirdRadioButtonText("VEF", cRates);
                             break;
                         case 2: // COP: has all options
                             RemoveButtons();
@@ -83,7 +89,7 @@ namespace CalculatorView
 
                             GoogleRateButton.Text = calculator.SetFirstButtonText("COP", cRates);
                             XEButton.Text = calculator.SetSecondButtonText("COP", cRates);
-                            WUButton.Text = calculator.SetThirdRadioButtonText();
+                            WUButton.Text = calculator.SetThirdRadioButtonText("COP", cRates);
                             AverageRateButton.Text = calculator.SetFourthRadioButtonText();
                             break;
                     }
@@ -111,7 +117,7 @@ namespace CalculatorView
         /// <param name="e"></param>
         private void sendCurrencyList_SelectedIndexChanged(object sender, EventArgs e)
         {
-           
+
             fromCurrency.Text = sendCurrencyList.Text;
             controller.SendingCurrencyChosen(sendCurrencyList.Text);
         }
@@ -159,8 +165,8 @@ namespace CalculatorView
         {
             GoogleRateButton.Visible = true;
             GoogleRateButton.Enabled = true;
-            GoogleRateButton.Checked = false;   
-                       
+            GoogleRateButton.Checked = false;
+
             XEButton.Visible = true;
             XEButton.Enabled = true;
             XEButton.Checked = false;
@@ -200,14 +206,5 @@ namespace CalculatorView
                 calculateButton_Click(sender, e);
         }
 
-        private void TOBox_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void outputNumberBox_TextChanged(object sender, EventArgs e)
-        {
-
-        }
     }
 }

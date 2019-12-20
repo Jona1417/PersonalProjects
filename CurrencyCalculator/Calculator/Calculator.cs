@@ -35,7 +35,7 @@ namespace Calculate
             averageExchangeRate = 0;
             CurrentExchangeRate = 0;
         }
-       
+
         public double Calculate(double input, double currentExchangeRate)
         {
             return input * currentExchangeRate;
@@ -118,9 +118,13 @@ namespace Calculate
         /// Modifies the Western Union radio button
         /// </summary>
         /// <returns></returns>
-        public string SetThirdRadioButtonText()
+        public string SetThirdRadioButtonText(string text, CurrencyRates cRates)
         {
-            return "Western Union: 1 " + currencyToConvert + " = " + WU_ExchangeRate + " " + convertedCurrency + "\r\n";
+            if (text.Contains("VEF"))
+                return "exchangerates.org.uk: 1 " + currencyToConvert + " = " + cRates.exchangeRateUK_USD_To_VEF 
+                    + " " + convertedCurrency + "\r\n";
+            else
+                return "Western Union: 1 " + currencyToConvert + " = " + WU_ExchangeRate + " " + convertedCurrency + "\r\n";
         }
 
         /// <summary>

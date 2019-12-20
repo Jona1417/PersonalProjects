@@ -79,6 +79,8 @@ namespace Control
                     calculator.CurrentExchangeRate = cRates.G_USD_To_VEF;
                 else if (buttonNumber == 2) // the rate is from Banco Central
                     calculator.CurrentExchangeRate = cRates.BCV_USD_To_VEF;
+                else if (buttonNumber == 3) //exchangerates.org.uk
+                    calculator.CurrentExchangeRate = cRates.exchangeRateUK_USD_To_VEF;
             }
             else // COP
             { 

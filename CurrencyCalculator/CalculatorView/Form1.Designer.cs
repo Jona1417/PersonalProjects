@@ -48,6 +48,7 @@
             this.XEButton = new System.Windows.Forms.RadioButton();
             this.WUButton = new System.Windows.Forms.RadioButton();
             this.AverageRateButton = new System.Windows.Forms.RadioButton();
+            this.lastUpdatedText = new System.Windows.Forms.TextBox();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -59,14 +60,14 @@
             this.helpToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(832, 28);
+            this.menuStrip1.Size = new System.Drawing.Size(832, 30);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
             // aboutToolStripMenuItem
             // 
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(64, 24);
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(64, 26);
             this.aboutToolStripMenuItem.Text = "About";
             // 
             // helpToolStripMenuItem
@@ -74,7 +75,7 @@
             this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.manualModeToolStripMenuItem});
             this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
-            this.helpToolStripMenuItem.Size = new System.Drawing.Size(55, 24);
+            this.helpToolStripMenuItem.Size = new System.Drawing.Size(55, 26);
             this.helpToolStripMenuItem.Text = "Help";
             // 
             // manualModeToolStripMenuItem
@@ -121,7 +122,7 @@
             this.receiveCurrencyText.TabIndex = 3;
             this.receiveCurrencyText.Text = "Receiver Currency:";
             // 
-            // ReceiveCurrBox
+            // receiveCurrencyList
             // 
             this.receiveCurrencyList.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.receiveCurrencyList.FormattingEnabled = true;
@@ -130,7 +131,7 @@
             "Venezuelan Bolivar (VEF)",
             "Colombian Peso (COP)"});
             this.receiveCurrencyList.Location = new System.Drawing.Point(471, 84);
-            this.receiveCurrencyList.Name = "ReceiveCurrBox";
+            this.receiveCurrencyList.Name = "receiveCurrencyList";
             this.receiveCurrencyList.Size = new System.Drawing.Size(306, 33);
             this.receiveCurrencyList.TabIndex = 4;
             this.receiveCurrencyList.SelectedIndexChanged += new System.EventHandler(this.receiveCurrBox_SelectedIndexChanged);
@@ -145,7 +146,7 @@
             this.TOBox.TabIndex = 5;
             this.TOBox.Text = "TO";
             this.TOBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.TOBox.TextChanged += new System.EventHandler(this.TOBox_TextChanged);
+          
             // 
             // exchangeRatesTitle
             // 
@@ -197,7 +198,7 @@
             this.outputNumberBox.Name = "outputNumberBox";
             this.outputNumberBox.Size = new System.Drawing.Size(108, 30);
             this.outputNumberBox.TabIndex = 14;
-            this.outputNumberBox.TextChanged += new System.EventHandler(this.outputNumberBox_TextChanged);
+
             // 
             // toCurrency
             // 
@@ -274,11 +275,23 @@
             this.AverageRateButton.UseVisualStyleBackColor = true;
             this.AverageRateButton.CheckedChanged += new System.EventHandler(this.AverageRateButton_CheckedChanged);
             // 
+            // lastUpdatedText
+            // 
+            this.lastUpdatedText.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.lastUpdatedText.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F);
+            this.lastUpdatedText.Location = new System.Drawing.Point(12, 425);
+            this.lastUpdatedText.Name = "lastUpdatedText";
+            this.lastUpdatedText.ReadOnly = true;
+            this.lastUpdatedText.Size = new System.Drawing.Size(350, 14);
+            this.lastUpdatedText.TabIndex = 21;
+            this.lastUpdatedText.Text = "Last Updated: 2019/12/19 3:20 PM";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(832, 450);
+            this.Controls.Add(this.lastUpdatedText);
             this.Controls.Add(this.AverageRateButton);
             this.Controls.Add(this.WUButton);
             this.Controls.Add(this.XEButton);
@@ -328,6 +341,7 @@
         private System.Windows.Forms.RadioButton XEButton;
         private System.Windows.Forms.RadioButton WUButton;
         private System.Windows.Forms.RadioButton AverageRateButton;
+        private System.Windows.Forms.TextBox lastUpdatedText;
     }
 }
 

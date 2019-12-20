@@ -37,22 +37,28 @@ namespace Calculate
         /// This rate refers to exchange of "non-essential" goods, with a rate that varies (DICOM)
         /// </summary>
         /// <see href="http://www.bcv.org.ve/"/>
-        public readonly double BCV_USD_To_VEF = 46366.58;
+        public readonly double BCV_USD_To_VEF = 47167.49;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <see href="https://www.exchangerates.org.uk/Dollars-to-Venezuelan-bolivar-currency-conversion-page.html"/>
+        public readonly double exchangeRateUK_USD_To_VEF = 248488.5076 ;
 
         /// <summary>
         /// Conversion rate of 1 USD to Colombian Pesos according to Google
         /// </summary>
-        public readonly double G_USD_To_COP = 3342.09;
+        public readonly double G_USD_To_COP = 3315.50;
 
         /// <summary>
         /// Conversion rate of 1 USD to Colombian Pesos according to xe.com
         /// </summary>
-        public readonly double XE_USD_To_COP = 3351.72;
+        public readonly double XE_USD_To_COP = 3313.76;
 
         /// <summary>
         /// Conversion rate of 1 USD to Colombian Pesos according to Western Union
         /// </summary>
-        public readonly double WU_USD_TO_COP = 3289.9178;
+        public readonly double WU_USD_TO_COP = 3272.9018;
 
         public readonly double AVG_USD_To_COP;
             
@@ -88,7 +94,5 @@ namespace Calculate
 
             AverageExchangeRate = sum / rates.Count;
         }
-
-
     }
 }
