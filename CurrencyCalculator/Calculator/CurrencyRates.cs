@@ -108,5 +108,10 @@ namespace Calculate
 
             AverageExchangeRate = sum / rates.Count;
         }
+
+        public void UpdateRates(double rateToChange)
+        {
+            
+        }
     }
 }

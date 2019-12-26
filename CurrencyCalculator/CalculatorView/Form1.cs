@@ -29,12 +29,16 @@ namespace CalculatorView
         /// </summary>
         private CurrencyRates cRates;
 
+        private DbController dbController;
+
         public Form1(CalcController c)
         {
             InitializeComponent();
             controller = c;
             calculator = new Calculator();
             cRates = new CurrencyRates();
+            dbController = new DbController(cRates);
+            dbController.UpdateVenezuelaRates();
 
             controller.selectionsBothValid += DisplayExchangeRates;
 
