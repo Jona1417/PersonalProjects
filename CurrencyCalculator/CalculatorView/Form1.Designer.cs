@@ -60,14 +60,14 @@
             this.helpToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(832, 30);
+            this.menuStrip1.Size = new System.Drawing.Size(832, 28);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
             // aboutToolStripMenuItem
             // 
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(64, 26);
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(64, 24);
             this.aboutToolStripMenuItem.Text = "About";
             // 
             // helpToolStripMenuItem
@@ -75,7 +75,7 @@
             this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.manualModeToolStripMenuItem});
             this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
-            this.helpToolStripMenuItem.Size = new System.Drawing.Size(55, 26);
+            this.helpToolStripMenuItem.Size = new System.Drawing.Size(55, 24);
             this.helpToolStripMenuItem.Text = "Help";
             // 
             // manualModeToolStripMenuItem
@@ -129,7 +129,9 @@
             this.receiveCurrencyList.Items.AddRange(new object[] {
             "",
             "Venezuelan Bolivar (VEF)",
-            "Colombian Peso (COP)"});
+            "Colombian Peso (COP)",
+            "Brazilian Real (BRL)",
+            "Chilean Peso (CLP)"});
             this.receiveCurrencyList.Location = new System.Drawing.Point(471, 84);
             this.receiveCurrencyList.Name = "receiveCurrencyList";
             this.receiveCurrencyList.Size = new System.Drawing.Size(306, 33);
@@ -146,7 +148,6 @@
             this.TOBox.TabIndex = 5;
             this.TOBox.Text = "TO";
             this.TOBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-          
             // 
             // exchangeRatesTitle
             // 
@@ -198,7 +199,6 @@
             this.outputNumberBox.Name = "outputNumberBox";
             this.outputNumberBox.Size = new System.Drawing.Size(108, 30);
             this.outputNumberBox.TabIndex = 14;
-
             // 
             // toCurrency
             // 

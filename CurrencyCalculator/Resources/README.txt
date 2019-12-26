@@ -43,3 +43,26 @@ AUTHOR: Jonathan Vidal-Contreras
 -Removed the ExchangeRateTextBox, which displayed the various rates and the average exchange rate between currencies. Now in its place there
 	is a series of radio buttons that allow for the user to pick an exchange rate that they would like to use for their calculations.
 	-TODO: implement the choices leading to different calculation results based on their choosing from 1 of the radio buttons.
+
+
+~~~~~~~~~~~~~~~~~~~
+~~~ VERSION 1.1 ~~~
+~~~~~~~~~~~~~~~~~~~
+
+(2019/12/23)
+
+-Adding conversion rates for Brazilian Reales and Chilean Pesos.
+-The format of options for selecting currency will be guaranteed to be the following:
+	FULL NAME OF CURRENCY (CURRENCY CODE) where the CURRENCY CODE is 3 letters.
+
+~~~~~~~~~~~~~~~~~~~
+~~ Version 2.0 ? ~~
+~~~~~~~~~~~~~~~~~~~
+NOTE: WHEN UPDATING THE INSTALLER, FIRST BUILD/REBUILD THE INSTALLER PROJECT (not the solution) AND TEST REINSTALLING
+(2019/12/23)
+-Created a separate branch for this attempt at version 2.0
+-Created a mySQL server/database that will contain the exchange rates (which me/an admin of the database can update using mySQL workbench)
+-How do I make a server that can allow remote connections (ie, different wifi networks) ?
+-I must create a user that has access to reading, not modifying the database, but also use an IP/website that allows for clients to connect 
+	and receive updates on exchange rates. Probably will use a generic name like "user" for accessing the database.
+	-user: newuser -- password = test_password1

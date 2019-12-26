@@ -73,35 +73,89 @@ namespace Control
         /// WUButton, and Average button, respectively</param>
         public void SetCurrentExchangeChoice(string text, Calculator calculator, CurrencyRates cRates, int buttonNumber)
         {
-            if (text.Contains("VEF")) // only can choose one of 2 buttons
+            string currencyCode = GetCurrencyCode(text);
+            switch (currencyCode)
             {
-                if (buttonNumber == 1) // the rate is from google
-                    calculator.CurrentExchangeRate = cRates.G_USD_To_VEF;
-                else if (buttonNumber == 2) // the rate is from Banco Central
-                    calculator.CurrentExchangeRate = cRates.BCV_USD_To_VEF;
-                else if (buttonNumber == 3) //exchangerates.org.uk
-                    calculator.CurrentExchangeRate = cRates.exchangeRateUK_USD_To_VEF;
+                case "VEF":
+                    if (buttonNumber == 1) // the rate is from google
+                        calculator.CurrentExchangeRate = cRates.G_USD_To_VEF;
+                    else if (buttonNumber == 2) // the rate is from Banco Central
+                        calculator.CurrentExchangeRate = cRates.BCV_USD_To_VEF;
+                    else if (buttonNumber == 3) //exchangerates.org.uk
+                        calculator.CurrentExchangeRate = cRates.exchangeRateUK_USD_To_VEF;
+                    break;
+                case "COP":
+                    switch (buttonNumber)
+                    {
+                        case 1:
+                            calculator.CurrentExchangeRate = cRates.G_USD_To_COP; // Google
+                            break;
+                        case 2:
+                            calculator.CurrentExchangeRate = cRates.XE_USD_To_COP; // xe.com  
+                            break;
+                        case 3:
+                            calculator.CurrentExchangeRate = cRates.WU_USD_To_COP; // Western Union
+                            break;
+                        case 4:
+                            calculator.CurrentExchangeRate = cRates.AVG_USD_To_COP; // average
+                            break;
+                        default:
+                            break;
+                    }
+                    break;
+                case "BRL":
+                    switch (buttonNumber)
+                    {
+                        case 1:
+                            calculator.CurrentExchangeRate = cRates.G_USD_To_BRL; // Google
+                            break;
+                        case 2:
+                            calculator.CurrentExchangeRate = cRates.XE_USD_To_BRL; // xe.com  
+                            break;
+                        case 3:
+                            calculator.CurrentExchangeRate = cRates.WU_USD_To_BRL; // Western Union
+                            break;
+                        case 4:
+                            calculator.CurrentExchangeRate = cRates.AVG_USD_To_BRL; // average
+                            break;
+                        default:
+                            break;
+                    }
+                    break;
+                case "CLP":
+                    switch (buttonNumber)
+                    {
+                        case 1:
+                            calculator.CurrentExchangeRate = cRates.G_USD_To_CLP; // Google
+                            break;
+                        case 2:
+                            calculator.CurrentExchangeRate = cRates.XE_USD_To_CLP; // xe.com  
+                            break;
+                        case 3:
+                            calculator.CurrentExchangeRate = cRates.WU_USD_To_CLP; // Western Union
+                            break;
+                        case 4:
+                            calculator.CurrentExchangeRate = cRates.AVG_USD_To_CLP; // average
+                            break;
+                        default:
+                            break;
+                    }
+                    break;
             }
-            else // COP
-            { 
-                switch(buttonNumber)
-                {
-                    case 1:
-                        calculator.CurrentExchangeRate = cRates.G_USD_To_COP; // Google
-                        break;
-                    case 2:
-                        calculator.CurrentExchangeRate = cRates.XE_USD_To_COP; // xe.com  
-                        break;
-                    case 3:
-                        calculator.CurrentExchangeRate = cRates.WU_USD_TO_COP; // Western Union
-                        break;
-                    case 4:
-                        calculator.CurrentExchangeRate = cRates.AVG_USD_To_COP; // average
-                        break;
-                    default:
-                        break;
-                }
-            }
+
+            //if (text.Contains("VEF")) // only can choose one of 2 buttons
+            //{
+               
+            //}
+            //else // COP
+            //{ 
+                
+            //}
+        }
+
+        private string GetCurrencyCode(string fullCurrencyName)
+        {
+            return fullCurrencyName.Substring(fullCurrencyName.Length - 4, 3);
         }
     }
 }

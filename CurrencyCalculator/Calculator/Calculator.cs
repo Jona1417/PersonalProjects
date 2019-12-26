@@ -49,7 +49,7 @@ namespace Calculate
         /// <param name="receiveIndex"></param>
         public void SetExchangeRates(CurrencyRates cRates, int sendIndex, int receiveIndex)
         {
-            //TODO: Try to move all this to the Controller
+            //TODO: Try to move all this to the Controller?
             List<double> rates = new List<double>();
             //string displayString = controller.SetDisplayString(sendCurrencyList.SelectedIndex);
             switch (sendIndex)
@@ -74,8 +74,30 @@ namespace Calculate
                         case 2: // COP
                             convertedCurrency = "COP";
                             googleExchangeRate = cRates.G_USD_To_COP;
-                            WU_ExchangeRate = cRates.WU_USD_TO_COP;
+                            WU_ExchangeRate = cRates.WU_USD_To_COP;
                             XE_ExchangeRate = cRates.XE_USD_To_COP;
+                            rates.Add(googleExchangeRate);
+                            rates.Add(WU_ExchangeRate);
+                            rates.Add(XE_ExchangeRate);
+                            cRates.setAverage(rates);
+                            averageExchangeRate = cRates.AverageExchangeRate;
+                            break;
+                        case 3: // BRL
+                            convertedCurrency = "BRL";
+                            googleExchangeRate = cRates.G_USD_To_BRL;
+                            WU_ExchangeRate = cRates.WU_USD_To_BRL;
+                            XE_ExchangeRate = cRates.XE_USD_To_BRL;
+                            rates.Add(googleExchangeRate);
+                            rates.Add(WU_ExchangeRate);
+                            rates.Add(XE_ExchangeRate);
+                            cRates.setAverage(rates);
+                            averageExchangeRate = cRates.AverageExchangeRate;
+                            break;
+                        case 4: //CLP
+                            convertedCurrency = "CLP";
+                            googleExchangeRate = cRates.G_USD_To_CLP;
+                            WU_ExchangeRate = cRates.WU_USD_To_CLP;
+                            XE_ExchangeRate = cRates.XE_USD_To_CLP;
                             rates.Add(googleExchangeRate);
                             rates.Add(WU_ExchangeRate);
                             rates.Add(XE_ExchangeRate);

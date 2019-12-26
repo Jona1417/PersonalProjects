@@ -59,7 +59,7 @@ namespace CalculatorView
                     {
                         case 0: // empty string/no choice
                             break;
-                        case 1: // VEF: only has 2 options (google, BCV)
+                        case 1: // VEF 3 options
                             RemoveButtons();
                             GoogleRateButton.Enabled = true;
                             GoogleRateButton.Visible = true;
@@ -90,6 +90,30 @@ namespace CalculatorView
                             GoogleRateButton.Text = calculator.SetFirstButtonText("COP", cRates);
                             XEButton.Text = calculator.SetSecondButtonText("COP", cRates);
                             WUButton.Text = calculator.SetThirdRadioButtonText("COP", cRates);
+                            AverageRateButton.Text = calculator.SetFourthRadioButtonText();
+                            break;
+                        case 3: //BRL
+                            RemoveButtons();
+                            EnableAllRadioButtons();
+
+                            //set the exchange rates
+                            calculator.SetExchangeRates(cRates, 1, 3);
+
+                            GoogleRateButton.Text = calculator.SetFirstButtonText("BRL", cRates);
+                            XEButton.Text = calculator.SetSecondButtonText("BRL", cRates);
+                            WUButton.Text = calculator.SetThirdRadioButtonText("BRL", cRates);
+                            AverageRateButton.Text = calculator.SetFourthRadioButtonText();
+                            break;
+                        case 4: //CLP
+                            RemoveButtons();
+                            EnableAllRadioButtons();
+
+                            //set the exchange rates
+                            calculator.SetExchangeRates(cRates, 1, 4);
+
+                            GoogleRateButton.Text = calculator.SetFirstButtonText("CLP", cRates);
+                            XEButton.Text = calculator.SetSecondButtonText("CLP", cRates);
+                            WUButton.Text = calculator.SetThirdRadioButtonText("CLP", cRates);
                             AverageRateButton.Text = calculator.SetFourthRadioButtonText();
                             break;
                     }
@@ -205,6 +229,5 @@ namespace CalculatorView
             if (e.KeyCode == Keys.Enter)
                 calculateButton_Click(sender, e);
         }
-
     }
 }
