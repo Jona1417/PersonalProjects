@@ -80,7 +80,6 @@ namespace CalculatorView
         /// </summary>
         private void DisplayExchangeRates()
         {
-            //TODO: Try to move all this to the Controller
             switch (sendCurrencyList.SelectedIndex)
             {
                 case 0: // empty string/no choice

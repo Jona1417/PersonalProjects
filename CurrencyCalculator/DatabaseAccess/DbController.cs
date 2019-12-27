@@ -60,7 +60,7 @@ namespace Control
 
                     // Create a command
                     MySqlCommand command = conn.CreateCommand();
-                    command.CommandText = "select * from brazil_exchange_rates"; // TODO: Change
+                    command.CommandText = "select * from brazil_exchange_rates";
 
                     // Execute the command and cycle through the DataReader object
                     using (MySqlDataReader reader = command.ExecuteReader())
@@ -108,7 +108,7 @@ namespace Control
 
                     // Create a command
                     MySqlCommand command = conn.CreateCommand();
-                    command.CommandText = "select * from chile_exchange_rates"; // TODO: Change
+                    command.CommandText = "select * from chile_exchange_rates";
 
                     // Execute the command and cycle through the DataReader object
                     using (MySqlDataReader reader = command.ExecuteReader())
@@ -157,7 +157,7 @@ namespace Control
 
                     // Create a command
                     MySqlCommand command = conn.CreateCommand();
-                    command.CommandText = "select * from colombia_exchange_rates"; // TODO: Change
+                    command.CommandText = "select * from colombia_exchange_rates"; 
 
                     // Execute the command and cycle through the DataReader object
                     using (MySqlDataReader reader = command.ExecuteReader())
@@ -205,7 +205,7 @@ namespace Control
 
                     // Create a command
                     MySqlCommand command = conn.CreateCommand();
-                    command.CommandText = "select * from venezuela_exchange_rates"; // TODO: Change
+                    command.CommandText = "select * from venezuela_exchange_rates"; 
 
                     // Execute the command and cycle through the DataReader object
                     using (MySqlDataReader reader = command.ExecuteReader())
@@ -255,7 +255,7 @@ namespace Control
 
                     // Create a command
                     MySqlCommand command = conn.CreateCommand();
-                    command.CommandText = "select LastUpdated from chile_exchange_rates"; // TODO: Change
+                    command.CommandText = "select LastUpdated from chile_exchange_rates"; 
 
                     // Execute the command and cycle through the DataReader object
                     using (MySqlDataReader reader = command.ExecuteReader())

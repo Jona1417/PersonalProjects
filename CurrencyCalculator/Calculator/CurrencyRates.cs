@@ -15,14 +15,7 @@ namespace Calculate
     {
         /*
          * Conversion from USD to other currencies 
-         */
-
-        /// <summary>
-        /// Conversion rate of 1 USD to Venezuelan Bolivares according to Google
-        /// </summary>
-        public double G_USD_To_VEF { get; private set; } // TODO: Remove this option from the form
-
-        /* This is actually converted the wrong way */
+         */        
 
         /// <summary> 
         /// Conversion rate of 1 USD to Venezuelan Bolivares according to xe.com
