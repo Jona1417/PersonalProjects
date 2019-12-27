@@ -90,9 +90,14 @@ namespace Calculate
 
         public double AverageExchangeRate { get; private set; }
 
-
+       
         public CurrencyRates()
         {
+            /*
+             * NOTE: the numbers in here are outdated, but used for initialization.
+             * These values were obtained in 2019, mid-December.
+             */
+
             // initialize the properties
             BCV_USD_To_VEF = 47167.49; // Venezuela
             exchangeRateUK_USD_To_VEF = 248488.5076;
@@ -191,7 +196,7 @@ namespace Calculate
                     break;
             }
 
-            //Reset the averages
+            //Update the averages
             AVG_USD_To_COP = (G_USD_To_COP + WU_USD_To_COP + XE_USD_To_COP) / 3;
             AVG_USD_To_BRL = (G_USD_To_BRL + WU_USD_To_BRL + XE_USD_To_BRL) / 3;
             AVG_USD_To_CLP = (G_USD_To_CLP + WU_USD_To_CLP + XE_USD_To_CLP) / 3;

@@ -55,9 +55,10 @@ AUTHOR: Jonathan Vidal-Contreras
 -The format of options for selecting currency will be guaranteed to be the following:
 	FULL NAME OF CURRENCY (CURRENCY CODE) where the CURRENCY CODE is 3 letters.
 
-~~~~~~~~~~~~~~~~~~~
-~~ Version 2.0 ? ~~
-~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~ CurrencyCalculator Version 2.0 ~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 NOTE: WHEN UPDATING THE INSTALLER, FIRST BUILD/REBUILD THE INSTALLER PROJECT (not the solution) AND TEST REINSTALLING
 
 (2019/12/23)
@@ -75,3 +76,7 @@ NOTE: WHEN UPDATING THE INSTALLER, FIRST BUILD/REBUILD THE INSTALLER PROJECT (no
 		has rates that don't change, so those timestamps will be outdated with respect to the rest of the database.
 -Should I let the user manually choose when to update the CurrencyCalculator's exchange rate values or let it do so automatically as 
 	I update the database?
+
+1:24 PM
+-Shifted code from the Calculator class into the CalcController class to more closely follow the MVC structure for this program.
+	Everything so far seems to still be functional.

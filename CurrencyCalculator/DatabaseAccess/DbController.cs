@@ -19,15 +19,15 @@ namespace Control
         public delegate void UpdateFailedHandler();
         public event UpdateFailedHandler FailedToUpdate;
 
-        
+
         /// <summary>
         /// The connection string.
-        /// Your uID login name serves as both your database name and your uid
         /// </summary>
         public const string connectionString = "server=192.168.21.173;" +
           "database=currency_exchange_rates;" +
           "uid=newuser;" +
           "password=test_password1";
+
         private CurrencyRates cRates;
 
         public DbController(CurrencyRates currencyRates)
@@ -36,7 +36,8 @@ namespace Control
         }
 
         /// <summary>
-        /// 
+        /// Retreives currency exchange rate information from each table in the database and lets the user know 
+        /// the time that the rates were last updated.
         /// </summary>
         public void UpdateAllRates()
         {
@@ -45,56 +46,6 @@ namespace Control
             UpdateBrazilRates();
             UpdateChileRates();
             ExchangeRatesUpdated();
-        }
-
-        private void UpdateChileRates()
-        {
-            // Connect to the DB
-            using (MySqlConnection conn = new MySqlConnection(connectionString))
-            {
-                try
-                {
-                    // Open a connection
-                    conn.Open();
-
-                    // Create a command
-                    MySqlCommand command = conn.CreateCommand();
-                    command.CommandText = "select * from chile_exchange_rates"; // TODO: Change
-
-                    // Execute the command and cycle through the DataReader object
-                    using (MySqlDataReader reader = command.ExecuteReader())
-                    {
-                        while (reader.Read())
-                        {
-                            double toParse = 0.0;
-                            switch (reader["Company"])
-                            {
-                                case "Google (Morningstar)":
-                                    toParse = (double)reader["ExchangeRate"];
-                                    Console.WriteLine("Colombia: " + toParse);
-                                    cRates.UpdateRates("Google", "CLP", toParse);
-                                    break;
-                                case "xe.com":
-                                    toParse = (double)reader["ExchangeRate"];
-                                    Console.WriteLine(toParse);
-                                    cRates.UpdateRates("xe.com", "CLP", toParse);
-                                    break;
-                                case "Western Union":
-                                    toParse = (double)reader["ExchangeRate"];
-                                    Console.WriteLine(toParse);
-                                    cRates.UpdateRates("Western Union", "CLP", toParse);
-                                    break;
-                            }
-                        }
-                    }
-                }
-
-                catch (Exception e)
-                {
-                    Console.WriteLine(e.Message);
-                    FailedToUpdate();
-                }
-            }
         }
 
         private void UpdateBrazilRates()
@@ -121,17 +72,14 @@ namespace Control
                             {
                                 case "Google (Morningstar)":
                                     toParse = (double)reader["ExchangeRate"];
-                                    Console.WriteLine("Brazil: " + toParse);
                                     cRates.UpdateRates("Google", "BRL", toParse);
                                     break;
                                 case "xe.com":
                                     toParse = (double)reader["ExchangeRate"];
-                                    Console.WriteLine(toParse);
                                     cRates.UpdateRates("xe.com", "BRL", toParse);
                                     break;
                                 case "Western Union":
                                     toParse = (double)reader["ExchangeRate"];
-                                    Console.WriteLine(toParse);
                                     cRates.UpdateRates("Western Union", "BRL", toParse);
                                     break;
                             }
@@ -146,6 +94,56 @@ namespace Control
                 }
             }
         }
+
+
+        private void UpdateChileRates()
+        {
+            // Connect to the DB
+            using (MySqlConnection conn = new MySqlConnection(connectionString))
+            {
+                try
+                {
+                    // Open a connection
+                    conn.Open();
+
+                    // Create a command
+                    MySqlCommand command = conn.CreateCommand();
+                    command.CommandText = "select * from chile_exchange_rates"; // TODO: Change
+
+                    // Execute the command and cycle through the DataReader object
+                    using (MySqlDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            double toParse = 0.0;
+                            switch (reader["Company"])
+                            {
+                                case "Google (Morningstar)":
+                                    toParse = (double)reader["ExchangeRate"];
+                                    cRates.UpdateRates("Google", "CLP", toParse);
+                                    break;
+                                case "xe.com":
+                                    toParse = (double)reader["ExchangeRate"];
+                                    cRates.UpdateRates("xe.com", "CLP", toParse);
+                                    break;
+                                case "Western Union":
+                                    toParse = (double)reader["ExchangeRate"];
+                                    cRates.UpdateRates("Western Union", "CLP", toParse);
+                                    break;
+                            }
+                        }
+                    }
+                }
+
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                    FailedToUpdate();
+                }
+            }
+        }
+
+
 
         private void UpdateColombiaRates()
         {
@@ -171,17 +169,14 @@ namespace Control
                             {
                                 case "Google (Morningstar)":
                                     toParse = (double)reader["ExchangeRate"];
-                                    Console.WriteLine("Colombia: " + toParse);
                                     cRates.UpdateRates("Google", "COP", toParse);
                                     break;
                                 case "xe.com":
                                     toParse = (double)reader["ExchangeRate"];
-                                    Console.WriteLine(toParse);
                                     cRates.UpdateRates("xe.com", "COP", toParse);
                                     break;
                                 case "Western Union":
                                     toParse = (double)reader["ExchangeRate"];
-                                    Console.WriteLine(toParse);
                                     cRates.UpdateRates("Western Union", "COP", toParse);
                                     break;
                             }
@@ -222,25 +217,21 @@ namespace Control
                             {
                                 case "BCV":
                                     toParse = (double)reader["ExchangeRate"];
-                                    Console.WriteLine(toParse);
                                     cRates.UpdateRates("BCV", "VEF", toParse);
                                     break;
                                 case "xe.com":
                                     toParse = (double)reader["ExchangeRate"];
-                                    Console.WriteLine(toParse);
                                     cRates.UpdateRates("xe.com", "VEF", toParse);
                                     break;
                                 case "exchangerates.org.uk":
                                     toParse = (double)reader["ExchangeRate"];
-                                    Console.WriteLine(toParse);
                                     cRates.UpdateRates("exchangerates.org.uk", "VEF", toParse);
                                     break;
                             }
                         }
                     }
-
-
                 }
+
                 catch (Exception e)
                 {
                     Console.WriteLine(e.Message);
@@ -249,6 +240,10 @@ namespace Control
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public DateTime GetTimeOfLastUpdate()
         {
             using (MySqlConnection conn = new MySqlConnection(connectionString))
@@ -267,11 +262,9 @@ namespace Control
                     {
                         while (reader.Read())
                         {
-                            return (DateTime) reader["LastUpdated"];
+                            return (DateTime)reader["LastUpdated"];
                         }
                     }
-
-
                 }
                 catch (Exception e)
                 {
@@ -279,6 +272,7 @@ namespace Control
                     FailedToUpdate();
                     return DateTime.MinValue; // indicates that something went wrong with the update
                 }
+
                 return DateTime.MinValue;
             }
         }

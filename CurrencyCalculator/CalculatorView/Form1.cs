@@ -30,7 +30,7 @@ namespace CalculatorView
         private CurrencyRates cRates;
 
         /// <summary>
-        /// Controls interaction with the currency exchange rates database
+        /// Controls interaction with the Currency Exchange Rates (CER) database
         /// </summary>
         private DbController dbController;
 
@@ -40,17 +40,19 @@ namespace CalculatorView
             controller = c;
             calculator = new Calculator();
             cRates = new CurrencyRates();
-            dbController = new DbController(cRates);            
+            dbController = new DbController(cRates);
 
-            //register to events in the controller
+            // register to events in the controller
             controller.SelectionsBothValid += DisplayExchangeRates;
             dbController.ExchangeRatesUpdated += DisplaySuccessfulUpdate;
             dbController.FailedToUpdate += DisplayUpdateFailure;
 
+            // Try to receive updates from the database
             dbController.UpdateAllRates();
+
             // Only let the buttons appear when choices are selected
             RemoveButtons();
-           
+
         }
 
         /// <summary>
@@ -69,7 +71,7 @@ namespace CalculatorView
         /// </summary>
         private void DisplaySuccessfulUpdate()
         {
-            lastUpdatedText.Text = "Last Updated: " + dbController.GetTimeOfLastUpdate().ToString();            
+            lastUpdatedText.Text = "Last Updated: " + dbController.GetTimeOfLastUpdate().ToString();
         }
 
         /// <summary>
@@ -102,49 +104,49 @@ namespace CalculatorView
                             WUButton.Checked = false;
 
                             //set the exchange rates
-                            calculator.SetExchangeRates(cRates, 1, 1);
-                            GoogleRateButton.Text = calculator.SetFirstButtonText("VEF", cRates);
+                            controller.SetExchangeRates(cRates, 1, 1);
+                            GoogleRateButton.Text = controller.SetFirstButtonText("VEF", cRates);
 
                             //Xe button will be the BCV
-                            XEButton.Text = calculator.SetSecondButtonText("VEF", cRates);
+                            XEButton.Text = controller.SetSecondButtonText("VEF", cRates);
 
-                            WUButton.Text = calculator.SetThirdRadioButtonText("VEF", cRates);
+                            WUButton.Text = controller.SetThirdRadioButtonText("VEF", cRates);
                             break;
                         case 2: // COP: has all options
                             RemoveButtons();
                             EnableAllRadioButtons();
 
                             //set the exchange rates
-                            calculator.SetExchangeRates(cRates, 1, 2);
+                            controller.SetExchangeRates(cRates, 1, 2);
 
-                            GoogleRateButton.Text = calculator.SetFirstButtonText("COP", cRates);
-                            XEButton.Text = calculator.SetSecondButtonText("COP", cRates);
-                            WUButton.Text = calculator.SetThirdRadioButtonText("COP", cRates);
-                            AverageRateButton.Text = calculator.SetFourthRadioButtonText();
+                            GoogleRateButton.Text = controller.SetFirstButtonText("COP", cRates);
+                            XEButton.Text = controller.SetSecondButtonText("COP", cRates);
+                            WUButton.Text = controller.SetThirdRadioButtonText("COP", cRates);
+                            AverageRateButton.Text = controller.SetFourthRadioButtonText();
                             break;
                         case 3: //BRL
                             RemoveButtons();
                             EnableAllRadioButtons();
 
                             //set the exchange rates
-                            calculator.SetExchangeRates(cRates, 1, 3);
+                            controller.SetExchangeRates(cRates, 1, 3);
 
-                            GoogleRateButton.Text = calculator.SetFirstButtonText("BRL", cRates);
-                            XEButton.Text = calculator.SetSecondButtonText("BRL", cRates);
-                            WUButton.Text = calculator.SetThirdRadioButtonText("BRL", cRates);
-                            AverageRateButton.Text = calculator.SetFourthRadioButtonText();
+                            GoogleRateButton.Text = controller.SetFirstButtonText("BRL", cRates);
+                            XEButton.Text = controller.SetSecondButtonText("BRL", cRates);
+                            WUButton.Text = controller.SetThirdRadioButtonText("BRL", cRates);
+                            AverageRateButton.Text = controller.SetFourthRadioButtonText();
                             break;
                         case 4: //CLP
                             RemoveButtons();
                             EnableAllRadioButtons();
 
                             //set the exchange rates
-                            calculator.SetExchangeRates(cRates, 1, 4);
+                            controller.SetExchangeRates(cRates, 1, 4);
 
-                            GoogleRateButton.Text = calculator.SetFirstButtonText("CLP", cRates);
-                            XEButton.Text = calculator.SetSecondButtonText("CLP", cRates);
-                            WUButton.Text = calculator.SetThirdRadioButtonText("CLP", cRates);
-                            AverageRateButton.Text = calculator.SetFourthRadioButtonText();
+                            GoogleRateButton.Text = controller.SetFirstButtonText("CLP", cRates);
+                            XEButton.Text = controller.SetSecondButtonText("CLP", cRates);
+                            WUButton.Text = controller.SetThirdRadioButtonText("CLP", cRates);
+                            AverageRateButton.Text = controller.SetFourthRadioButtonText();
                             break;
                     }
                     break;
@@ -233,38 +235,63 @@ namespace CalculatorView
             AverageRateButton.Visible = true;
             AverageRateButton.Enabled = true;
             AverageRateButton.Checked = false;
-
-           // calculateButton.Enabled = false;
         }
 
+        /// <summary>
+        /// When the user clicks on the first radio button
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void GoogleRateButton_CheckedChanged(object sender, EventArgs e)
         {
             controller.SetCurrentExchangeChoice(receiveCurrencyList.Text, calculator, cRates, 1);
             calculateButton.Enabled = true;
         }
 
+        /// <summary>
+        /// When the user clicks on the second radio button
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void XEButton_CheckedChanged(object sender, EventArgs e)
         {
             controller.SetCurrentExchangeChoice(receiveCurrencyList.Text, calculator, cRates, 2);
             calculateButton.Enabled = true;
         }
 
+        /// <summary>
+        /// When the user clicks on the third radio button
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void WUButton_CheckedChanged(object sender, EventArgs e)
         {
             controller.SetCurrentExchangeChoice(receiveCurrencyList.Text, calculator, cRates, 3);
             calculateButton.Enabled = true;
         }
 
+        /// <summary>
+        /// When the user clicks on the fourth radio button
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void AverageRateButton_CheckedChanged(object sender, EventArgs e)
         {
             controller.SetCurrentExchangeChoice(receiveCurrencyList.Text, calculator, cRates, 4);
             calculateButton.Enabled = true;
         }
 
+        /// <summary>
+        /// If the user presses enter while the focus is on the number input box
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void inputNumberBox_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter && calculateButton.Enabled)
                 calculateButton_Click(sender, e);
         }
+
+
     }
 }

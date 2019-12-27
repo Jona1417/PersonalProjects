@@ -156,7 +156,7 @@
             this.exchangeRatesTitle.Location = new System.Drawing.Point(153, 182);
             this.exchangeRatesTitle.Name = "exchangeRatesTitle";
             this.exchangeRatesTitle.ReadOnly = true;
-            this.exchangeRatesTitle.Size = new System.Drawing.Size(131, 27);
+            this.exchangeRatesTitle.Size = new System.Drawing.Size(155, 27);
             this.exchangeRatesTitle.TabIndex = 9;
             this.exchangeRatesTitle.Text = "Exchange Rates:";
             // 
