@@ -19,11 +19,10 @@ namespace Control
         public delegate void UpdateFailedHandler();
         public event UpdateFailedHandler FailedToUpdate;
 
-
         /// <summary>
         /// The connection string.
         /// </summary>
-        public const string connectionString = "server=192.168.21.173;" +
+        public const string connectionString = "server=192.168.21.173;" + "port=3306;" +
           "database=currency_exchange_rates;" +
           "uid=newuser;" +
           "password=test_password1";
@@ -41,14 +40,13 @@ namespace Control
         /// </summary>
         public void UpdateAllRates()
         {
-            UpdateVenezuelaRates();
-            UpdateColombiaRates();
-            UpdateBrazilRates();
-            UpdateChileRates();
-            ExchangeRatesUpdated();
+            if (!(UpdateBrazilRates() && UpdateChileRates() && UpdateColombiaRates() && UpdateVenezuelaRates()))
+                FailedToUpdate();
+            else
+                ExchangeRatesUpdated();
         }
 
-        private void UpdateBrazilRates()
+        private bool UpdateBrazilRates()
         {
             // Connect to the DB
             using (MySqlConnection conn = new MySqlConnection(connectionString))
@@ -84,19 +82,21 @@ namespace Control
                                     break;
                             }
                         }
+
+                        return true;
                     }
                 }
 
                 catch (Exception e)
                 {
                     Console.WriteLine(e.Message);
-                    FailedToUpdate();
+                    return false;
+                    //FailedToUpdate();
                 }
             }
         }
 
-
-        private void UpdateChileRates()
+        private bool UpdateChileRates()
         {
             // Connect to the DB
             using (MySqlConnection conn = new MySqlConnection(connectionString))
@@ -132,20 +132,20 @@ namespace Control
                                     break;
                             }
                         }
+                        return true;
                     }
                 }
 
                 catch (Exception e)
                 {
                     Console.WriteLine(e.Message);
-                    FailedToUpdate();
+                    return false;
+                    //FailedToUpdate();
                 }
             }
         }
 
-
-
-        private void UpdateColombiaRates()
+        private bool UpdateColombiaRates()
         {
             // Connect to the DB
             using (MySqlConnection conn = new MySqlConnection(connectionString))
@@ -157,7 +157,7 @@ namespace Control
 
                     // Create a command
                     MySqlCommand command = conn.CreateCommand();
-                    command.CommandText = "select * from colombia_exchange_rates"; 
+                    command.CommandText = "select * from colombia_exchange_rates";
 
                     // Execute the command and cycle through the DataReader object
                     using (MySqlDataReader reader = command.ExecuteReader())
@@ -181,19 +181,20 @@ namespace Control
                                     break;
                             }
                         }
+                        return true;
                     }
                 }
 
                 catch (Exception e)
                 {
                     Console.WriteLine(e.Message);
-                    FailedToUpdate();
+                    return false;
+                    //FailedToUpdate();
                 }
             }
         }
 
-
-        public void UpdateVenezuelaRates()
+        public bool UpdateVenezuelaRates()
         {
             // Connect to the DB
             using (MySqlConnection conn = new MySqlConnection(connectionString))
@@ -205,7 +206,7 @@ namespace Control
 
                     // Create a command
                     MySqlCommand command = conn.CreateCommand();
-                    command.CommandText = "select * from venezuela_exchange_rates"; 
+                    command.CommandText = "select * from venezuela_exchange_rates";
 
                     // Execute the command and cycle through the DataReader object
                     using (MySqlDataReader reader = command.ExecuteReader())
@@ -229,13 +230,15 @@ namespace Control
                                     break;
                             }
                         }
+                        return true;
                     }
                 }
 
                 catch (Exception e)
                 {
                     Console.WriteLine(e.Message);
-                    FailedToUpdate();
+                    return false;
+                    //FailedToUpdate();
                 }
             }
         }
@@ -255,7 +258,7 @@ namespace Control
 
                     // Create a command
                     MySqlCommand command = conn.CreateCommand();
-                    command.CommandText = "select LastUpdated from chile_exchange_rates"; 
+                    command.CommandText = "select LastUpdated from chile_exchange_rates";
 
                     // Execute the command and cycle through the DataReader object
                     using (MySqlDataReader reader = command.ExecuteReader())

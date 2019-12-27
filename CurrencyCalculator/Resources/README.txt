@@ -80,3 +80,8 @@ NOTE: WHEN UPDATING THE INSTALLER, FIRST BUILD/REBUILD THE INSTALLER PROJECT (no
 1:24 PM
 -Shifted code from the Calculator class into the CalcController class to more closely follow the MVC structure for this program.
 	Everything so far seems to still be functional.
+
+~~~~~~~~~~
+Version 2.1
+~~~~~~~~~~
+- Fixed bug with too many error messages displaying when a connection fails. Still need to figure out remote connection.
