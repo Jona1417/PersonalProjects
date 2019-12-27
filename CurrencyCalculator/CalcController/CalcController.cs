@@ -16,7 +16,7 @@ namespace Control
 
         public delegate void CurrenciesValidHandler();
 
-        public event CurrenciesValidHandler selectionsBothValid;
+        public event CurrenciesValidHandler SelectionsBothValid;
 
         /// <summary>
         /// Controls how user input affects the display of the View's Currency rates.
@@ -42,7 +42,7 @@ namespace Control
 
             if (sendingCurrencyIsValid && receivingCurrencyIsValid)
             {
-                selectionsBothValid();
+                SelectionsBothValid();
             }
         }
 
@@ -60,7 +60,7 @@ namespace Control
 
             if (sendingCurrencyIsValid && receivingCurrencyIsValid)
             {
-                selectionsBothValid();
+                SelectionsBothValid();
             }
         }
 

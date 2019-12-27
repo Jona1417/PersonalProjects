@@ -59,6 +59,7 @@ AUTHOR: Jonathan Vidal-Contreras
 ~~ Version 2.0 ? ~~
 ~~~~~~~~~~~~~~~~~~~
 NOTE: WHEN UPDATING THE INSTALLER, FIRST BUILD/REBUILD THE INSTALLER PROJECT (not the solution) AND TEST REINSTALLING
+
 (2019/12/23)
 -Created a separate branch for this attempt at version 2.0
 -Created a mySQL server/database that will contain the exchange rates (which me/an admin of the database can update using mySQL workbench)
@@ -66,3 +67,9 @@ NOTE: WHEN UPDATING THE INSTALLER, FIRST BUILD/REBUILD THE INSTALLER PROJECT (no
 -I must create a user that has access to reading, not modifying the database, but also use an IP/website that allows for clients to connect 
 	and receive updates on exchange rates. Probably will use a generic name like "user" for accessing the database.
 	-user: newuser -- password = test_password1
+
+(2019/12/27) 12:05 PM
+-Added a "LastUpdated" column to the currency exchange rate tables on the currency_exchange_rates database.
+	This indicates the time that the values were most recently updated, and I will use that info to display on the bottom right corner
+	of the GUI. I have chosen the chile table in particular to display the time of last update, because the Venezulan currency table
+	has rates that don't change, so those timestamps will be outdated with respect to the rest of the database.

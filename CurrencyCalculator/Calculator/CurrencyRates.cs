@@ -190,6 +190,11 @@ namespace Calculate
                     }
                     break;
             }
+
+            //Reset the averages
+            AVG_USD_To_COP = (G_USD_To_COP + WU_USD_To_COP + XE_USD_To_COP) / 3;
+            AVG_USD_To_BRL = (G_USD_To_BRL + WU_USD_To_BRL + XE_USD_To_BRL) / 3;
+            AVG_USD_To_CLP = (G_USD_To_CLP + WU_USD_To_CLP + XE_USD_To_CLP) / 3;
         }
     }
 }

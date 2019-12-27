@@ -41,10 +41,22 @@ namespace CalculatorView
             dbController.UpdateAllRates();
             dbController.UpdateVenezuelaRates();
 
-            controller.selectionsBothValid += DisplayExchangeRates;
+            controller.SelectionsBothValid += DisplayExchangeRates;
+            dbController.ExchangeRatesUpdated += DisplaySuccessfulUpdate;
+            dbController.FailedToUpdate += DisplayUpdateFailure;
 
             // Only let the buttons appear when choices are selected
             RemoveButtons();
+        }
+
+        private void DisplayUpdateFailure()
+        {
+            throw new NotImplementedException();
+        }
+
+        private void DisplaySuccessfulUpdate()
+        {
+            throw new NotImplementedException();
         }
 
         /// <summary>

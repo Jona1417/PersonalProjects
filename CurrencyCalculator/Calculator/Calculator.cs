@@ -119,8 +119,12 @@ namespace Calculate
         /// <returns></returns>
         public string SetFirstButtonText(string v, CurrencyRates cRates)
         {
-            return "xe.com: 1 " + currencyToConvert + " = " +
-                    XE_ExchangeRate + " " + convertedCurrency + "\r\n";
+            if (v == "VEF") 
+                return "xe.com: 1 " + currencyToConvert + " = " +
+                        XE_ExchangeRate + " " + convertedCurrency + "\r\n";
+            else
+                return "Google (Morningstar): 1 " + currencyToConvert + " = " +
+                        googleExchangeRate + " " + convertedCurrency + "\r\n";
         }
 
         /// <summary>
@@ -143,7 +147,7 @@ namespace Calculate
         public string SetThirdRadioButtonText(string text, CurrencyRates cRates)
         {
             if (text.Contains("VEF"))
-                return "exchangerates.org.uk: 1 " + currencyToConvert + " = " + cRates.exchangeRateUK_USD_To_VEF 
+                return "exchangerates.org.uk: 1 " + currencyToConvert + " = " + cRates.exchangeRateUK_USD_To_VEF
                     + " " + convertedCurrency + "\r\n";
             else
                 return "Western Union: 1 " + currencyToConvert + " = " + WU_ExchangeRate + " " + convertedCurrency + "\r\n";
