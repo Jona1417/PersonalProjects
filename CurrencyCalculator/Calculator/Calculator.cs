@@ -64,7 +64,7 @@ namespace Calculate
                             break;
                         case 1: // VEF
                             convertedCurrency = "VEF";
-                            googleExchangeRate = cRates.G_USD_To_VEF;
+                            XE_ExchangeRate = cRates.XE_USD_To_VEF;
                             BCV_ExchangeRate = cRates.BCV_USD_To_VEF;
                             rates.Add(googleExchangeRate);
                             rates.Add(BCV_ExchangeRate);
@@ -119,8 +119,8 @@ namespace Calculate
         /// <returns></returns>
         public string SetFirstButtonText(string v, CurrencyRates cRates)
         {
-            return "Google (Morningstar): 1 " + currencyToConvert + " = " +
-                    googleExchangeRate + " " + convertedCurrency + "\r\n";
+            return "xe.com: 1 " + currencyToConvert + " = " +
+                    XE_ExchangeRate + " " + convertedCurrency + "\r\n";
         }
 
         /// <summary>

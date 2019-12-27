@@ -28,6 +28,77 @@ namespace Control
             cRates = currencyRates;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        public void UpdateAllRates()
+        {
+            UpdateVenezuelaRates();
+            UpdateColombiaRates();
+            //UpdateBrazilRates();
+            //UpdateChileRates();
+        }
+
+        private void UpdateChileRates()
+        {
+            throw new NotImplementedException();
+        }
+
+        private void UpdateBrazilRates()
+        {
+            throw new NotImplementedException();
+        }
+
+        private void UpdateColombiaRates()
+        {
+            // Connect to the DB
+            using (MySqlConnection conn = new MySqlConnection(connectionString))
+            {
+                try
+                {
+                    // Open a connection
+                    conn.Open();
+
+                    // Create a command
+                    MySqlCommand command = conn.CreateCommand();
+                    command.CommandText = "select * from colombia_exchange_rates"; // TODO: Change
+
+                    // Execute the command and cycle through the DataReader object
+                    using (MySqlDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            double toParse = 0.0;
+                            switch (reader["Company"])
+                            {
+                                case "Google (Morningstar)":
+                                    toParse = (double)reader["ExchangeRate"];
+                                    Console.WriteLine("Colombia: " + toParse);
+                                    cRates.UpdateRates("Google", "COP", toParse);
+                                    break;
+                                case "xe.com":
+                                    toParse = (double)reader["ExchangeRate"];
+                                    Console.WriteLine(toParse);
+                                    cRates.UpdateRates("xe.com", "COP", toParse);
+                                    break;
+                                case "Western Union":
+                                    toParse = (double)reader["ExchangeRate"];
+                                    Console.WriteLine(toParse);
+                                    cRates.UpdateRates("Western Union", "COP", toParse);
+                                    break;
+                            }
+                        }
+                    }
+                }
+
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                }
+            }
+        }
+
+       
         public void UpdateVenezuelaRates()
         {
             // Connect to the DB
@@ -53,20 +124,19 @@ namespace Control
                                 case "BCV":
                                     toParse = (double)reader["ExchangeRate"];
                                     Console.WriteLine(toParse);
-                                    cRates.UpdateRates(toParse);
+                                    cRates.UpdateRates("BCV", "VEF", toParse);
                                     break;
                                 case "xe.com":
                                     toParse = (double)reader["ExchangeRate"];
                                     Console.WriteLine(toParse);
-                                    cRates.UpdateRates(toParse);
+                                    cRates.UpdateRates("xe.com", "VEF", toParse);
                                     break;
                                 case "exchangerates.org.uk":
                                     toParse = (double)reader["ExchangeRate"];
                                     Console.WriteLine(toParse);
-                                    cRates.UpdateRates(toParse);
+                                    cRates.UpdateRates("exchangerates.org.uk", "VEF", toParse);
                                     break;
-                            }
-                            // TODO: CHANGE
+                            }                        
                         }
                     }
 
@@ -78,5 +148,7 @@ namespace Control
                 }
             }
         }
+
+      
     }
 }

@@ -77,8 +77,8 @@ namespace Control
             switch (currencyCode)
             {
                 case "VEF":
-                    if (buttonNumber == 1) // the rate is from google
-                        calculator.CurrentExchangeRate = cRates.G_USD_To_VEF;
+                    if (buttonNumber == 1) // the rate is from xe.com
+                        calculator.CurrentExchangeRate = cRates.XE_USD_To_VEF;
                     else if (buttonNumber == 2) // the rate is from Banco Central
                         calculator.CurrentExchangeRate = cRates.BCV_USD_To_VEF;
                     else if (buttonNumber == 3) //exchangerates.org.uk
@@ -142,15 +142,6 @@ namespace Control
                     }
                     break;
             }
-
-            //if (text.Contains("VEF")) // only can choose one of 2 buttons
-            //{
-               
-            //}
-            //else // COP
-            //{ 
-                
-            //}
         }
 
         private string GetCurrencyCode(string fullCurrencyName)

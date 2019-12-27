@@ -38,6 +38,7 @@ namespace CalculatorView
             calculator = new Calculator();
             cRates = new CurrencyRates();
             dbController = new DbController(cRates);
+            dbController.UpdateAllRates();
             dbController.UpdateVenezuelaRates();
 
             controller.selectionsBothValid += DisplayExchangeRates;
