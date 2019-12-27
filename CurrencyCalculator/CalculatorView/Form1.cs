@@ -29,6 +29,9 @@ namespace CalculatorView
         /// </summary>
         private CurrencyRates cRates;
 
+        /// <summary>
+        /// Controls interaction with the currency exchange rates database
+        /// </summary>
         private DbController dbController;
 
         public Form1(CalcController c)
@@ -37,26 +40,36 @@ namespace CalculatorView
             controller = c;
             calculator = new Calculator();
             cRates = new CurrencyRates();
-            dbController = new DbController(cRates);
-            dbController.UpdateAllRates();
-            dbController.UpdateVenezuelaRates();
+            dbController = new DbController(cRates);            
 
+            //register to events in the controller
             controller.SelectionsBothValid += DisplayExchangeRates;
             dbController.ExchangeRatesUpdated += DisplaySuccessfulUpdate;
             dbController.FailedToUpdate += DisplayUpdateFailure;
 
+            dbController.UpdateAllRates();
             // Only let the buttons appear when choices are selected
             RemoveButtons();
+           
         }
 
+        /// <summary>
+        /// Displays to the user that there was an error while connecting to the Currency Exchange Rates (CER) database or while
+        /// trying to retrieve information from that DB.
+        /// </summary>
         private void DisplayUpdateFailure()
         {
-            throw new NotImplementedException();
+            MessageBox.Show("Error occurred while trying to obtain updated currency exchange rates. Please check your " +
+                "connection and try again by restarting the client.", "Unable to receive updates from Currency Exchange Rates" +
+                " (CER) Database", MessageBoxButtons.OK, MessageBoxIcon.Warning);
         }
 
+        /// <summary>
+        /// Updates the time the currency exchange rates were last updated (if the connection/retrieval process was successful)
+        /// </summary>
         private void DisplaySuccessfulUpdate()
         {
-            throw new NotImplementedException();
+            lastUpdatedText.Text = "Last Updated: " + dbController.GetTimeOfLastUpdate().ToString();            
         }
 
         /// <summary>
@@ -197,6 +210,7 @@ namespace CalculatorView
             WUButton.Enabled = false;
             AverageRateButton.Visible = false;
             AverageRateButton.Enabled = false;
+            calculateButton.Enabled = false;
         }
 
         /// <summary>
@@ -219,31 +233,37 @@ namespace CalculatorView
             AverageRateButton.Visible = true;
             AverageRateButton.Enabled = true;
             AverageRateButton.Checked = false;
+
+           // calculateButton.Enabled = false;
         }
 
         private void GoogleRateButton_CheckedChanged(object sender, EventArgs e)
         {
             controller.SetCurrentExchangeChoice(receiveCurrencyList.Text, calculator, cRates, 1);
+            calculateButton.Enabled = true;
         }
 
         private void XEButton_CheckedChanged(object sender, EventArgs e)
         {
             controller.SetCurrentExchangeChoice(receiveCurrencyList.Text, calculator, cRates, 2);
+            calculateButton.Enabled = true;
         }
 
         private void WUButton_CheckedChanged(object sender, EventArgs e)
         {
             controller.SetCurrentExchangeChoice(receiveCurrencyList.Text, calculator, cRates, 3);
+            calculateButton.Enabled = true;
         }
 
         private void AverageRateButton_CheckedChanged(object sender, EventArgs e)
         {
             controller.SetCurrentExchangeChoice(receiveCurrencyList.Text, calculator, cRates, 4);
+            calculateButton.Enabled = true;
         }
 
         private void inputNumberBox_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Enter)
+            if (e.KeyCode == Keys.Enter && calculateButton.Enabled)
                 calculateButton_Click(sender, e);
         }
     }
