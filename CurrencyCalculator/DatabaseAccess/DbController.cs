@@ -22,7 +22,7 @@ namespace Control
         /// <summary>
         /// The connection string.
         /// </summary>
-        public const string connectionString = "server=192.168.21.173;" + "port=3306;" +
+        public const string connectionString = "server=localhost;" + "port=3306;" +
           "database=currency_exchange_rates;" +
           "uid=newuser;" +
           "password=test_password1";
@@ -32,6 +32,7 @@ namespace Control
         public DbController(CurrencyRates currencyRates)
         {
             cRates = currencyRates;
+            cRates.LoadSettings("ExchangeRateSettings.xml");
         }
 
         /// <summary>
@@ -91,7 +92,6 @@ namespace Control
                 {
                     Console.WriteLine(e.Message);
                     return false;
-                    //FailedToUpdate();
                 }
             }
         }

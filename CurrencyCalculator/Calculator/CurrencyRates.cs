@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml;
 
 namespace Calculate
 {
@@ -13,9 +15,14 @@ namespace Calculate
     /// </summary>
     public class CurrencyRates
     {
+        /// <summary>
+        /// Contains the abbreviated names of currencies currently used in the program
+        /// </summary>
+        private List<string> currencyCodes = new List<string>();
+
         /*
          * Conversion from USD to other currencies 
-         */        
+         */
 
         /// <summary> 
         /// Conversion rate of 1 USD to Venezuelan Bolivares according to xe.com
@@ -83,9 +90,15 @@ namespace Calculate
 
         public double AverageExchangeRate { get; private set; }
 
-       
+
         public CurrencyRates()
         {
+            //Add the currency codes in use
+            currencyCodes.Add("BRL");
+            currencyCodes.Add("CLP");
+            currencyCodes.Add("COP");
+            currencyCodes.Add("VEF");
+
             /*
              * NOTE: the numbers in here are outdated, but used for initialization.
              * These values were obtained in 2019, mid-December.
@@ -188,11 +201,186 @@ namespace Calculate
                     }
                     break;
             }
+        }
 
-            //Update the averages
+        /// <summary>
+        /// Updates the average exchange rates of each currency according to information received from the database or
+        /// from the ExchangeRateSettings XML file.
+        /// </summary>
+        public void UpdateAverages()
+        {
             AVG_USD_To_COP = (G_USD_To_COP + WU_USD_To_COP + XE_USD_To_COP) / 3;
             AVG_USD_To_BRL = (G_USD_To_BRL + WU_USD_To_BRL + XE_USD_To_BRL) / 3;
             AVG_USD_To_CLP = (G_USD_To_CLP + WU_USD_To_CLP + XE_USD_To_CLP) / 3;
+        }
+
+        /// <summary>
+        /// Will save the most recent currency exchange rate settings to an xml file.
+        /// </summary>
+        /// <param name="filename"></param>
+        public void Save(string filename)
+        {
+            XmlWriterSettings settings = new XmlWriterSettings();
+            settings.Indent = true;
+            settings.IndentChars = "  ";
+
+            try
+            {
+                using (XmlWriter wr = XmlWriter.Create(filename, settings))
+                {
+                    wr.WriteStartDocument();
+                    wr.WriteStartElement("CurrencyRateSettings");
+                    wr.WriteAttributeString("version", "2.2");
+
+                    foreach (string code in currencyCodes)
+                    {
+                        wr.WriteStartElement(code);
+                        switch (code)
+                        {
+                            case "BRL":
+                                wr.WriteElementString("Google", "" + G_USD_To_BRL);
+                                wr.WriteElementString("WesternUnion", "" + WU_USD_To_BRL);
+                                wr.WriteElementString("xe.com", "" + XE_USD_To_BRL);
+                                break;
+                            case "CLP":
+                                wr.WriteElementString("Google", "" + G_USD_To_CLP);
+                                wr.WriteElementString("WesternUnion", "" + WU_USD_To_CLP);
+                                wr.WriteElementString("xe.com", "" + XE_USD_To_CLP);
+                                break;
+                            case "COP":
+                                wr.WriteElementString("Google", "" + G_USD_To_COP);
+                                wr.WriteElementString("WesternUnion", "" + WU_USD_To_COP);
+                                wr.WriteElementString("xe.com", "" + XE_USD_To_COP);
+                                break;
+                            case "VEF":
+                                wr.WriteElementString("BCV", "" + BCV_USD_To_VEF);
+                                wr.WriteElementString("exchangerates.org.uk", "" + exchangeRateUK_USD_To_VEF);
+                                wr.WriteElementString("xe.com", "" + XE_USD_To_VEF);
+                                break;
+                            default:
+                                break;
+                        }
+                        wr.WriteEndElement();
+                    }
+                    wr.WriteEndElement();
+                    wr.WriteEndDocument();
+                }
+            }
+
+            catch (DirectoryNotFoundException)
+            {
+                Console.WriteLine("DNFException");
+                //throw new SpreadsheetReadWriteException("Invalid File Path");
+            }
+
+            catch (IOException)
+            {
+                Console.WriteLine("IO");
+                //throw new SpreadsheetReadWriteException("I/O Error");
+            }
+
+            catch (Exception)
+            {
+
+            }
+        }
+
+        public void LoadSettings(string filename)
+        {
+            try
+            {
+                XmlReaderSettings settings = new XmlReaderSettings();
+                settings.IgnoreWhitespace = true;
+                using (XmlReader rd = XmlReader.Create(filename,settings))
+                {
+                    while (rd.Read())
+                    {
+                        if (rd.IsStartElement())
+                        {
+                            switch (rd.Name)
+                            {
+                                case "BRL":
+                                    rd.Read(); // get to Google
+                                    rd.Read(); // get to the numeric value
+                                    G_USD_To_BRL = double.Parse(rd.Value);
+                                    rd.Read(); // "/Google"
+
+                                    rd.Read(); // get to xe.com
+                                    rd.Read();
+                                    WU_USD_To_BRL = double.Parse(rd.Value);
+                                    rd.Read(); // "/WesternUnion"
+
+                                    rd.Read(); // get to xe.com
+                                    rd.Read();
+                                    XE_USD_To_BRL = double.Parse(rd.Value); // don't need to read more than this
+                                    break;
+                                case "CLP":
+                                    rd.Read(); // get to Google
+                                    rd.Read(); // get to the numeric value
+                                    G_USD_To_CLP = double.Parse(rd.Value);
+                                    rd.Read(); // "/Google"
+
+                                    rd.Read(); // get to xe.com
+                                    rd.Read();
+                                    WU_USD_To_CLP = double.Parse(rd.Value);
+                                    rd.Read(); // "/WesternUnion"
+
+                                    rd.Read(); // get to xe.com
+                                    rd.Read();
+                                    XE_USD_To_CLP = double.Parse(rd.Value); // don't need to read more than this
+                                    break;
+                                case "COP":
+                                    rd.Read(); // get to Google
+                                    rd.Read(); // get to the numeric value
+                                    G_USD_To_COP = double.Parse(rd.Value);
+                                    rd.Read(); // "/Google"
+
+                                    rd.Read(); // get to xe.com
+                                    rd.Read();
+                                    WU_USD_To_COP = double.Parse(rd.Value);
+                                    rd.Read(); // "/WesternUnion"
+
+                                    rd.Read(); // get to xe.com
+                                    rd.Read();
+                                    XE_USD_To_COP = double.Parse(rd.Value); // don't need to read more than this
+                                    break;
+                                case "VEF":
+                                    rd.Read(); // get to Google
+                                    rd.Read(); // get to the numeric value
+                                    BCV_USD_To_VEF = double.Parse(rd.Value);
+                                    rd.Read(); // "/Google"
+
+                                    rd.Read(); // get to xe.com
+                                    rd.Read();
+                                    exchangeRateUK_USD_To_VEF = double.Parse(rd.Value);
+                                    rd.Read(); // "/WesternUnion"
+
+                                    rd.Read(); // get to xe.com
+                                    rd.Read();
+                                    XE_USD_To_VEF = double.Parse(rd.Value); // don't need to read more than this
+                                    break;
+                                default:
+                                    break;
+                                    // throw new SpreadsheetReadWriteException("Unknown element found while reading file");
+                            }
+                        }
+                    }
+                }
+            }
+            catch (DirectoryNotFoundException)
+            {
+
+            }
+
+            catch (IOException)
+            {
+
+            }
+
+            catch (Exception)
+            {
+                Console.WriteLine("Exception caught");
+            }
         }
     }
 }

@@ -85,3 +85,10 @@ NOTE: WHEN UPDATING THE INSTALLER, FIRST BUILD/REBUILD THE INSTALLER PROJECT (no
 Version 2.1
 ~~~~~~~~~~
 - Fixed bug with too many error messages displaying when a connection fails. Still need to figure out remote connection.
+
+~~~~~~~~~~~
+Version 2.2
+~~~~~~~~~~~
+-Will try to add a manual connection button so the user can choose to connect to a database.
+-Will create an XML file that will contain the currency exchange rates so the user can have a more "updated" (ie, less outdated)
+	set of currency exchange rates, based on the last time the application was able to connect to the CER

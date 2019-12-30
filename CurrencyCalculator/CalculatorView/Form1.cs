@@ -49,6 +49,8 @@ namespace CalculatorView
 
             // Try to receive updates from the database
             dbController.UpdateAllRates();
+            cRates.UpdateAverages();
+            cRates.Save("ExchangeRateSettings.xml");
 
             // Only let the buttons appear when choices are selected
             RemoveButtons();
