@@ -34,6 +34,7 @@ namespace CalculatorView
         /// </summary>
         private DbController dbController;
 
+
         public Form1(CalcController c)
         {
             InitializeComponent();
@@ -50,6 +51,7 @@ namespace CalculatorView
             // Try to receive updates from the database
             dbController.UpdateAllRates();
             cRates.UpdateAverages();
+            cRates.SetLastUpdatedSetting(dbController.GetTimeOfLastUpdate().ToString());
             cRates.Save("ExchangeRateSettings.xml");
 
             // Only let the buttons appear when choices are selected
@@ -72,7 +74,7 @@ namespace CalculatorView
         /// Updates the time the currency exchange rates were last updated (if the connection/retrieval process was successful)
         /// </summary>
         private void DisplaySuccessfulUpdate()
-        {
+        {            
             lastUpdatedText.Text = "Last Updated: " + dbController.GetTimeOfLastUpdate().ToString();
         }
 

@@ -62,6 +62,7 @@ namespace Calculate
 
         public double AVG_USD_To_COP { get; private set; }
 
+       
         /// <summary>
         /// Exchange rate of 1 USD to Brazilian Reales according to Google (Morningstar)
         /// </summary>
@@ -89,7 +90,7 @@ namespace Calculate
         public double AVG_USD_To_CLP { get; private set; }
 
         public double AverageExchangeRate { get; private set; }
-
+        public string TimeOfLastUpdate { get; private set; }
 
         public CurrencyRates()
         {
@@ -260,8 +261,9 @@ namespace Calculate
                             default:
                                 break;
                         }
-                        wr.WriteEndElement();
+                        wr.WriteEndElement();                       
                     }
+                    wr.WriteElementString("LastUpdated", TimeOfLastUpdate);
                     wr.WriteEndElement();
                     wr.WriteEndDocument();
                 }
@@ -359,6 +361,10 @@ namespace Calculate
                                     rd.Read();
                                     XE_USD_To_VEF = double.Parse(rd.Value); // don't need to read more than this
                                     break;
+                                case "LastUpdated":
+                                    rd.Read();
+                                    TimeOfLastUpdate = rd.Value;
+                                    break;
                                 default:
                                     break;
                                     // throw new SpreadsheetReadWriteException("Unknown element found while reading file");
@@ -382,5 +388,11 @@ namespace Calculate
                 Console.WriteLine("Exception caught");
             }
         }
+
+        public void SetLastUpdatedSetting(string t)
+        {
+            TimeOfLastUpdate = t;
+        }
+
     }
 }
