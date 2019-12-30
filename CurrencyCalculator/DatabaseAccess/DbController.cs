@@ -139,8 +139,7 @@ namespace Control
                 catch (Exception e)
                 {
                     Console.WriteLine(e.Message);
-                    return false;
-                    //FailedToUpdate();
+                    return false;                    
                 }
             }
         }
@@ -189,7 +188,6 @@ namespace Control
                 {
                     Console.WriteLine(e.Message);
                     return false;
-                    //FailedToUpdate();
                 }
             }
         }
@@ -238,13 +236,12 @@ namespace Control
                 {
                     Console.WriteLine(e.Message);
                     return false;
-                    //FailedToUpdate();
                 }
             }
         }
 
         /// <summary>
-        /// 
+        /// Gets the most recent date/time that the database was updated.
         /// </summary>
         /// <returns></returns>
         public DateTime GetTimeOfLastUpdate()

@@ -62,7 +62,7 @@ namespace Calculate
 
         public double AVG_USD_To_COP { get; private set; }
 
-       
+
         /// <summary>
         /// Exchange rate of 1 USD to Brazilian Reales according to Google (Morningstar)
         /// </summary>
@@ -261,7 +261,7 @@ namespace Calculate
                             default:
                                 break;
                         }
-                        wr.WriteEndElement();                       
+                        wr.WriteEndElement();
                     }
                     wr.WriteElementString("LastUpdated", TimeOfLastUpdate);
                     wr.WriteEndElement();
@@ -272,13 +272,11 @@ namespace Calculate
             catch (DirectoryNotFoundException)
             {
                 Console.WriteLine("DNFException");
-                //throw new SpreadsheetReadWriteException("Invalid File Path");
             }
 
             catch (IOException)
             {
                 Console.WriteLine("IO");
-                //throw new SpreadsheetReadWriteException("I/O Error");
             }
 
             catch (Exception)
@@ -293,7 +291,7 @@ namespace Calculate
             {
                 XmlReaderSettings settings = new XmlReaderSettings();
                 settings.IgnoreWhitespace = true;
-                using (XmlReader rd = XmlReader.Create(filename,settings))
+                using (XmlReader rd = XmlReader.Create(filename, settings))
                 {
                     while (rd.Read())
                     {
@@ -393,6 +391,5 @@ namespace Calculate
         {
             TimeOfLastUpdate = t;
         }
-
     }
 }

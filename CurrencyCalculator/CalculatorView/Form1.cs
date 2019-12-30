@@ -295,6 +295,13 @@ namespace CalculatorView
                 calculateButton_Click(sender, e);
         }
 
-
+        private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("This version of CurrencyCalculator tries to access the Currency Exchange Rates (CER) database " +
+                "designed specifically for this application. If the connection is successful, the values are updated as the " +
+                "database receives updates. If not successful, then the exchange rates will be based off the last update the " +
+                "application was able to connect to the CER database.", "Version 2.2", 
+                MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
     }
 }

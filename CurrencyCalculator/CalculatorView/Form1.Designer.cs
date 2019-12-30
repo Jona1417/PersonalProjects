@@ -69,6 +69,7 @@
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
             this.aboutToolStripMenuItem.Size = new System.Drawing.Size(64, 24);
             this.aboutToolStripMenuItem.Text = "About";
+            this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
             // helpToolStripMenuItem
             // 
@@ -81,7 +82,7 @@
             // manualModeToolStripMenuItem
             // 
             this.manualModeToolStripMenuItem.Name = "manualModeToolStripMenuItem";
-            this.manualModeToolStripMenuItem.Size = new System.Drawing.Size(184, 26);
+            this.manualModeToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.manualModeToolStripMenuItem.Text = "Manual Mode";
             this.manualModeToolStripMenuItem.Click += new System.EventHandler(this.manualModeToolStripMenuItem_Click);
             // 
