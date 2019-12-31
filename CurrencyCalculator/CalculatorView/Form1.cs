@@ -66,8 +66,8 @@ namespace CalculatorView
         private void DisplayUpdateFailure()
         {
             MessageBox.Show("Error occurred while trying to obtain updated currency exchange rates. Please check your " +
-                "connection and try again by restarting the client.", "Unable to receive updates from Currency Exchange Rates" +
-                " (CER) Database", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                "connection and try again by restarting the client.", "Unable to receive updates from database",
+                MessageBoxButtons.OK, MessageBoxIcon.Warning);
         }
 
         /// <summary>
