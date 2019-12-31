@@ -128,7 +128,7 @@ namespace Calculate
             AverageExchangeRate = 0;
         }
 
-        public void setAverage(List<double> rates)
+        public void SetAverage(List<double> rates)
         {
             double sum = 0;
             foreach (double d in rates)
@@ -365,7 +365,6 @@ namespace Calculate
                                     break;
                                 default:
                                     break;
-                                    // throw new SpreadsheetReadWriteException("Unknown element found while reading file");
                             }
                         }
                     }

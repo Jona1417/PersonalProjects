@@ -200,7 +200,7 @@ namespace Control
                             BCV_ExchangeRate = cRates.BCV_USD_To_VEF;
                             rates.Add(googleExchangeRate);
                             rates.Add(BCV_ExchangeRate);
-                            cRates.setAverage(rates);
+                            cRates.SetAverage(rates);
                             averageExchangeRate = cRates.AverageExchangeRate;
                             break;
                         case 2: // COP
@@ -211,7 +211,7 @@ namespace Control
                             rates.Add(googleExchangeRate);
                             rates.Add(WU_ExchangeRate);
                             rates.Add(XE_ExchangeRate);
-                            cRates.setAverage(rates);
+                            cRates.SetAverage(rates);
                             averageExchangeRate = cRates.AverageExchangeRate;
                             break;
                         case 3: // BRL
@@ -222,7 +222,7 @@ namespace Control
                             rates.Add(googleExchangeRate);
                             rates.Add(WU_ExchangeRate);
                             rates.Add(XE_ExchangeRate);
-                            cRates.setAverage(rates);
+                            cRates.SetAverage(rates);
                             averageExchangeRate = cRates.AverageExchangeRate;
                             break;
                         case 4: //CLP
@@ -233,7 +233,7 @@ namespace Control
                             rates.Add(googleExchangeRate);
                             rates.Add(WU_ExchangeRate);
                             rates.Add(XE_ExchangeRate);
-                            cRates.setAverage(rates);
+                            cRates.SetAverage(rates);
                             averageExchangeRate = cRates.AverageExchangeRate;
                             break;
                         default:

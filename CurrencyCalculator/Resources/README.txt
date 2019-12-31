@@ -89,6 +89,10 @@ Version 2.1
 ~~~~~~~~~~~
 Version 2.2
 ~~~~~~~~~~~
+(2019/12/30)
 -Will try to add a manual connection button so the user can choose to connect to a database.
 -Will create an XML file that will contain the currency exchange rates so the user can have a more "updated" (ie, less outdated)
 	set of currency exchange rates, based on the last time the application was able to connect to the CER.
+
+(2019/12/31)
+-Added manual connection method for users.

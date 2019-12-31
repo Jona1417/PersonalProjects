@@ -32,8 +32,9 @@ namespace CalculatorView
         /// <summary>
         /// Controls interaction with the Currency Exchange Rates (CER) database
         /// </summary>
-        private DbController dbController;
-
+        internal DbController dbController;
+        
+        private Form2 manualInputForm;
 
         public Form1(CalcController c)
         {
@@ -50,10 +51,7 @@ namespace CalculatorView
 
             // Try to receive updates from the database
             dbController.UpdateAllRates();
-            cRates.UpdateAverages();
-            cRates.SetLastUpdatedSetting(dbController.GetTimeOfLastUpdate().ToString());
-            cRates.Save("ExchangeRateSettings.xml");
-
+           
             // Only let the buttons appear when choices are selected
             RemoveButtons();
 
@@ -66,16 +64,19 @@ namespace CalculatorView
         private void DisplayUpdateFailure()
         {
             MessageBox.Show("Error occurred while trying to obtain updated currency exchange rates. Please check your " +
-                "connection and try again by restarting the client.", "Unable to receive updates from Currency Exchange Rates" +
-                " (CER) Database", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                "connection and try again by restarting the client or turning on manual mode.", 
+                "Unable to receive updates from database",
+                MessageBoxButtons.OK, MessageBoxIcon.Warning);
         }
 
         /// <summary>
         /// Updates the time the currency exchange rates were last updated (if the connection/retrieval process was successful)
         /// </summary>
         private void DisplaySuccessfulUpdate()
-        {            
-            lastUpdatedText.Text = "Last Updated: " + dbController.GetTimeOfLastUpdate().ToString();
+        {
+            lastUpdatedText.Text = "Last Updated: " + cRates.TimeOfLastUpdate;
+            MessageBox.Show("Connection to address successful.", "Success", MessageBoxButtons.OK);
+            manualInputForm.Close();
         }
 
         /// <summary>
@@ -165,8 +166,9 @@ namespace CalculatorView
         /// <param name="e"></param>
         private void manualModeToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("In Version 1.0, there is no manual input mode as of yet. Please wait for future versions" +
-                " of CurrencyCalculator to take advantage of that feature", "Manual Mode", MessageBoxButtons.OK);
+            //Create the window that handles manual connections
+            manualInputForm = new Form2(this);
+            manualInputForm.Show();          
         }
 
         /// <summary>
@@ -300,8 +302,14 @@ namespace CalculatorView
             MessageBox.Show("This version of CurrencyCalculator tries to access the Currency Exchange Rates (CER) database " +
                 "designed specifically for this application. If the connection is successful, the values are updated as the " +
                 "database receives updates. If not successful, then the exchange rates will be based off the last update the " +
-                "application was able to connect to the CER database.", "Version 2.2", 
+                "application was able to connect to the CER database.", "Version 2.2",
                 MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        internal void ManualConnect(string text)
+        {
+           // Takes care of the reconnection as well
+            lastUpdatedText.Text = "Last Updated: " + dbController.ManualConnectToDatabase(text);            
         }
     }
 }

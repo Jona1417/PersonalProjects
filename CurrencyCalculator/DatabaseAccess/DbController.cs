@@ -22,10 +22,11 @@ namespace Control
         /// <summary>
         /// The connection string.
         /// </summary>
-        public const string connectionString = "server=localhost;" + "port=3306;" +
+        public const string connectionString = "server=1.1.1.1;" + "port=3306;" +
           "database=currency_exchange_rates;" +
           "uid=newuser;" +
-          "password=test_password1";
+          "password=test_password1;" +
+          "ConnectionTimeout=2";
 
         private CurrencyRates cRates;
 
@@ -41,16 +42,46 @@ namespace Control
         /// </summary>
         public void UpdateAllRates()
         {
-            if (!(UpdateBrazilRates() && UpdateChileRates() && UpdateColombiaRates() && UpdateVenezuelaRates()))
+            if (!(UpdateBrazilRates(connectionString) && UpdateChileRates(connectionString) &&
+                UpdateColombiaRates(connectionString) && UpdateVenezuelaRates(connectionString)))
                 FailedToUpdate();
+
             else
+            {
+                cRates.UpdateAverages();
+                cRates.SetLastUpdatedSetting(GetTimeOfLastUpdate().ToString());
+                cRates.Save("ExchangeRateSettings.xml");
                 ExchangeRatesUpdated();
+            }
+
         }
 
-        private bool UpdateBrazilRates()
+        /// <summary>
+        /// This overload of the original UpdateAllRates will try to retreive info from the CER database based on user input.
+        /// </summary>
+        /// <param name="manualInput"></param>
+        public bool UpdateAllRates(string manualInput)
+        {
+            if (!(UpdateBrazilRates(manualInput) && UpdateChileRates(manualInput) &&
+                UpdateColombiaRates(manualInput) && UpdateVenezuelaRates(manualInput)))
+            {
+                FailedToUpdate();
+                return false;
+            }
+            else
+            {
+                cRates.UpdateAverages();
+                cRates.SetLastUpdatedSetting(GetTimeOfLastUpdate(manualInput).ToString());
+                cRates.Save("ExchangeRateSettings.xml");
+                ExchangeRatesUpdated();
+                return true;
+            }
+        }
+
+        private bool UpdateBrazilRates(string connectString)
         {
             // Connect to the DB
-            using (MySqlConnection conn = new MySqlConnection(connectionString))
+            using (MySqlConnection conn = new MySqlConnection(connectString))
             {
                 try
                 {
@@ -96,10 +127,10 @@ namespace Control
             }
         }
 
-        private bool UpdateChileRates()
+        private bool UpdateChileRates(string connectString)
         {
             // Connect to the DB
-            using (MySqlConnection conn = new MySqlConnection(connectionString))
+            using (MySqlConnection conn = new MySqlConnection(connectString))
             {
                 try
                 {
@@ -139,15 +170,15 @@ namespace Control
                 catch (Exception e)
                 {
                     Console.WriteLine(e.Message);
-                    return false;                    
+                    return false;
                 }
             }
         }
 
-        private bool UpdateColombiaRates()
+        private bool UpdateColombiaRates(string connectString)
         {
             // Connect to the DB
-            using (MySqlConnection conn = new MySqlConnection(connectionString))
+            using (MySqlConnection conn = new MySqlConnection(connectString))
             {
                 try
                 {
@@ -192,10 +223,10 @@ namespace Control
             }
         }
 
-        public bool UpdateVenezuelaRates()
+        public bool UpdateVenezuelaRates(string connectString)
         {
             // Connect to the DB
-            using (MySqlConnection conn = new MySqlConnection(connectionString))
+            using (MySqlConnection conn = new MySqlConnection(connectString))
             {
                 try
                 {
@@ -262,6 +293,7 @@ namespace Control
                     {
                         while (reader.Read())
                         {
+                            cRates.SetLastUpdatedSetting(reader["LastUpdated"].ToString());
                             return (DateTime)reader["LastUpdated"];
                         }
                     }
@@ -275,6 +307,53 @@ namespace Control
 
                 return DateTime.MinValue;
             }
+        }
+
+        public DateTime GetTimeOfLastUpdate(string manualString)
+        {
+            using (MySqlConnection conn = new MySqlConnection(manualString))
+            {
+                try
+                {
+                    // Open a connection
+                    conn.Open();
+
+                    // Create a command
+                    MySqlCommand command = conn.CreateCommand();
+                    command.CommandText = "select LastUpdated from chile_exchange_rates";
+
+                    // Execute the command and cycle through the DataReader object
+                    using (MySqlDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            return (DateTime)reader["LastUpdated"];
+                        }
+                    }
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                    FailedToUpdate();
+                    return DateTime.MinValue; // indicates that something went wrong with the update
+                }
+
+                return DateTime.MinValue;
+            }
+        }
+
+        public string ManualConnectToDatabase(string text)
+        {
+            string manualConnectionString = "server=" + text + ";" + "port=3306;" +
+            "database=currency_exchange_rates;" +
+            "uid=manualuser;" +
+            "password=test_password1;" +
+            "ConnectionTimeout=2";
+
+            if (UpdateAllRates(manualConnectionString))
+                return GetTimeOfLastUpdate(manualConnectionString).ToString();
+            else
+                return DateTime.MinValue.ToString();
         }
     }
 }
